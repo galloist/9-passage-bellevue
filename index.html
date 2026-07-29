@@ -1,1797 +1,992 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>9 Passage Bellevue - Syndic bénévole V5.1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <style>
-    :root {
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --blue:#1769aa;
-      --green:#00a896;
-      --orange:#f59e0b;
-      --red:#dc2626;
-      --violet:#7c3aed;
-      --cyan:#0891b2;
-      --radius:18px;
-      --shadow:0 10px 25px rgba(15,23,42,.08);
-    }
+<title>9 Passage Bellevue - Syndic bénévole V5.2 Light</title>
 
-    * {
-      box-sizing:border-box;
-    }
+<style>
 
-    body {
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
+:root{
+ --blue:#1769aa;
+ --bg:#f4f6f9;
+ --card:#ffffff;
+ --text:#1f2937;
+ --muted:#6b7280;
+ --line:#e5e7eb;
+ --radius:16px;
+}
 
-    header {
-      background:linear-gradient(135deg,var(--blue),var(--green));
-      color:white;
-      padding:22px 16px 26px;
-      border-bottom-left-radius:26px;
-      border-bottom-right-radius:26px;
-      box-shadow:var(--shadow);
-    }
+*{
+ box-sizing:border-box;
+}
 
-    header h1 {
-      margin:0;
-      font-size:1.45rem;
-    }
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
 
-    header p {
-      margin:6px 0 0;
-      font-size:.92rem;
-      opacity:.95;
-    }
+header{
+ background:white;
+ border-bottom:1px solid var(--line);
+ padding:18px;
+}
 
-    main {
-      max-width:1020px;
-      margin:auto;
-      padding:14px 14px 90px;
-    }
+header h1{
+ margin:0;
+ font-size:1.4rem;
+ color:var(--blue);
+}
 
-    nav {
-      display:flex;
-      gap:8px;
-      overflow-x:auto;
-      position:sticky;
-      top:0;
-      background:rgba(244,247,251,.96);
-      backdrop-filter:blur(8px);
-      padding:10px 0;
-      z-index:5;
-    }
+header p{
+ margin-top:4px;
+ color:var(--muted);
+ font-size:.9rem;
+}
 
-    nav button {
-      border:0;
-      border-radius:999px;
-      background:white;
-      color:var(--text);
-      padding:10px 13px;
-      font-weight:700;
-      white-space:nowrap;
-      box-shadow:0 2px 8px rgba(0,0,0,.07);
-    }
+main{
+ max-width:1000px;
+ margin:auto;
+ padding:12px;
+ padding-bottom:120px;
+}
 
-    nav button.active {
-      background:var(--blue);
-      color:white;
-    }
+nav{
+ display:flex;
+ gap:8px;
+ overflow-x:auto;
+ padding-bottom:8px;
+ margin-bottom:12px;
+}
 
-    section {
-      display:none;
-    }
+nav button{
+ border:none;
+ border-radius:999px;
+ padding:10px 14px;
+ background:white;
+ font-weight:700;
+ cursor:pointer;
+ white-space:nowrap;
+}
 
-    section.active {
-      display:block;
-    }
+nav button.active{
+ background:var(--blue);
+ color:white;
+}
 
-    .card {
-      background:var(--card);
-      border:1px solid rgba(229,231,235,.8);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:15px;
-      margin-bottom:14px;
-    }
+section{
+ display:none;
+}
 
-    .grid {
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-    }
+section.active{
+ display:block;
+}
 
-    @media(min-width:720px) {
-      .grid.two { grid-template-columns:1fr 1fr; }
-      .grid.three { grid-template-columns:repeat(3,1fr); }
-      .grid.four { grid-template-columns:repeat(4,1fr); }
-    }
+.card{
+ background:white;
+ border:1px solid var(--line);
+ border-radius:var(--radius);
+ padding:15px;
+ margin-bottom:12px;
+}
 
-    h2, h3 {
-      margin:0 0 10px;
-    }
+.grid{
+ display:grid;
+ gap:10px;
+}
 
-    label {
-      display:block;
-      margin-top:10px;
-      font-size:.84rem;
-      color:var(--muted);
-      font-weight:700;
-    }
+.grid.two{
+ grid-template-columns:1fr 1fr;
+}
 
-    input, select, textarea {
-      width:100%;
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:11px 12px;
-      margin-top:5px;
-      font-size:1rem;
-      background:white;
-      color:var(--text);
-    }
+.kpi{
+ background:white;
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:14px;
+}
 
-    textarea {
-      min-height:78px;
-      resize:vertical;
-    }
+.kpi span{
+ display:block;
+ color:var(--muted);
+ font-size:.8rem;
+}
 
-    select[multiple] {
-      min-height:120px;
-    }
+.kpi strong{
+ font-size:1.3rem;
+ color:var(--blue);
+}
 
-    .btn {
-      width:100%;
-      border:0;
-      border-radius:14px;
-      padding:12px 14px;
-      margin-top:12px;
-      font-size:.95rem;
-      font-weight:800;
-      color:white;
-      background:var(--blue);
-      cursor:pointer;
-    }
+label{
+ display:block;
+ margin-top:10px;
+ font-size:.85rem;
+ color:var(--muted);
+}
 
-    .btn.green { background:var(--green); }
-    .btn.orange { background:var(--orange); }
-    .btn.red { background:var(--red); }
-    .btn.violet { background:var(--violet); }
-    .btn.cyan { background:var(--cyan); }
-    .btn.light { background:#eef2ff; color:#3730a3; }
+input,
+select,
+textarea{
+ width:100%;
+ margin-top:4px;
+ padding:10px;
+ border-radius:12px;
+ border:1px solid var(--line);
+}
 
-    .kpi {
-      border-radius:18px;
-      padding:15px;
-      color:white;
-      min-height:96px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
+textarea{
+ min-height:80px;
+}
 
-    .kpi strong {
-      font-size:1.35rem;
-    }
+.btn{
+ width:100%;
+ margin-top:12px;
+ padding:12px;
+ border:none;
+ border-radius:12px;
+ background:var(--blue);
+ color:white;
+ font-weight:700;
+ cursor:pointer;
+}
 
-    .kpi span {
-      font-size:.82rem;
-      opacity:.95;
-    }
+.item{
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:12px;
+ margin-top:10px;
+}
 
-    .blueBox { background:linear-gradient(135deg,#1769aa,#38bdf8); }
-    .greenBox { background:linear-gradient(135deg,#059669,#34d399); }
-    .orangeBox { background:linear-gradient(135deg,#ea580c,#fbbf24); }
-    .redBox { background:linear-gradient(135deg,#b91c1c,#fb7185); }
-    .violetBox { background:linear-gradient(135deg,#6d28d9,#a78bfa); }
-    .cyanBox { background:linear-gradient(135deg,#0891b2,#67e8f9); }
+.item h4{
+ margin:0 0 6px;
+}
 
-    .item {
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:#fbfdff;
-      padding:12px;
-      margin-top:10px;
-    }
+.muted{
+ color:var(--muted);
+ font-size:.9rem;
+}
 
-    .item h4 {
-      margin:0 0 6px;
-    }
+.badge{
+ display:inline-block;
+ padding:4px 8px;
+ border-radius:999px;
+ background:#e5eff9;
+ color:var(--blue);
+ font-size:.75rem;
+ margin-right:4px;
+}
 
-    .muted {
-      color:var(--muted);
-      font-size:.9rem;
-      line-height:1.45;
-    }
+.tree{
+ font-family:monospace;
+ white-space:pre-wrap;
+ font-size:.85rem;
+}
 
-    .small {
-      font-size:.82rem;
-    }
+</style>
 
-    .badge {
-      display:inline-block;
-      border-radius:999px;
-      padding:4px 9px;
-      margin:2px 3px 2px 0;
-      font-size:.75rem;
-      font-weight:800;
-      background:#e0f2fe;
-      color:#075985;
-    }
-
-    .badge.green { background:#dcfce7; color:#166534; }
-    .badge.orange { background:#fef3c7; color:#92400e; }
-    .badge.red { background:#fee2e2; color:#991b1b; }
-    .badge.gray { background:#f3f4f6; color:#6b7280; }
-    .badge.violet { background:#ede9fe; color:#5b21b6; }
-    .badge.cyan { background:#cffafe; color:#155e75; }
-
-    .actions {
-      display:flex;
-      gap:8px;
-      margin-top:10px;
-    }
-
-    .actions button {
-      flex:1;
-      border:0;
-      border-radius:10px;
-      padding:9px;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .positive {
-      color:#15803d;
-      font-weight:900;
-    }
-
-    .negative {
-      color:#b91c1c;
-      font-weight:900;
-    }
-
-    .barRow {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin:8px 0;
-    }
-
-    .barLabel {
-      width:95px;
-      font-size:.8rem;
-    }
-
-    .barWrap {
-      flex:1;
-      background:#e5e7eb;
-      border-radius:999px;
-      overflow:hidden;
-      height:13px;
-    }
-
-    .bar {
-      height:13px;
-      border-radius:999px;
-      background:linear-gradient(90deg,var(--blue),var(--green));
-    }
-
-    .amount {
-      width:86px;
-      text-align:right;
-      font-size:.8rem;
-    }
-
-    .donut {
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      margin:12px auto;
-      background:conic-gradient(#e5e7eb 0 100%);
-      position:relative;
-    }
-
-    .donut:after {
-      content:"";
-      position:absolute;
-      inset:38px;
-      background:white;
-      border-radius:50%;
-    }
-
-    .tree {
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-      font-size:.86rem;
-      line-height:1.45;
-      white-space:pre-wrap;
-      background:#f8fafc;
-      border:1px solid #e5e7eb;
-      border-radius:14px;
-      padding:12px;
-      overflow-x:auto;
-    }
-
-    .folderCard {
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      margin-top:10px;
-      background:#ffffff;
-    }
-
-    .folderHeader {
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-      font-weight:900;
-    }
-
-    .docLink {
-      color:var(--blue);
-      font-weight:800;
-      text-decoration:none;
-      word-break:break-word;
-    }
-
-    .docLink:hover {
-      text-decoration:underline;
-    }
-  </style>
 </head>
 
 <body>
+
 <header>
-  <h1 id="title">9 Passage Bellevue</h1>
-  <p>Syndic bénévole V5.1 - finances, lots, dépenses, justificatifs, Drive préparé et arborescence documentaire</p>
+ <h1 id="coproNameHeader">9 Passage Bellevue</h1>
+ <p>Syndic bénévole V5.2 Light</p>
 </header>
 
 <main>
-  <nav id="nav">
-    <button class="active" data-tab="home">Accueil</button>
-    <button data-tab="finance">Finances</button>
-    <button data-tab="expense">Dépenses</button>
-    <button data-tab="owners">Lots</button>
-    <button data-tab="suppliers">Fournisseurs</button>
-    <button data-tab="calls">Appels</button>
-    <button data-tab="tasks">Actions</button>
-    <button data-tab="decisions">Décisions</button>
-    <button data-tab="documents">Documents</button>
-    <button data-tab="drive">Drive</button>
-    <button data-tab="settings">Réglages</button>
-  </nav>
-
-  <section id="home" class="active">
-    <div class="grid two">
-      <div class="kpi blueBox"><span>Solde bancaire réel</span><strong id="kBank">0 €</strong></div>
-      <div class="kpi greenBox"><span>Trésorerie théorique après dépenses</span><strong id="kTheo">0 €</strong></div>
-      <div class="kpi orangeBox"><span>Dépenses futures programmées</span><strong id="kFuture">0 €</strong></div>
-      <div class="kpi redBox"><span>Montant à régulariser copropriétaires</span><strong id="kDue">0 €</strong></div>
-      <div class="kpi violetBox"><span>Documents référencés</span><strong id="kDocs">0</strong></div>
-      <div class="kpi cyanBox"><span>Dépenses sans justificatif</span><strong id="kNoDoc">0</strong></div>
-    </div>
-
-    <div class="card">
-      <h3>Alertes président du syndic</h3>
-      <div id="alerts"></div>
-    </div>
-
-    <div class="card">
-      <h3>Prochaines échéances</h3>
-      <div id="nextEvents"></div>
-    </div>
-  </section>
-
-  <section id="finance">
-    <div class="card">
-      <h3>Graphiques financiers</h3>
-      <div class="grid two">
-        <div>
-          <h4>Dépenses par catégorie</h4>
-          <div id="categoryBars"></div>
-        </div>
-        <div>
-          <h4>Répartition visuelle</h4>
-          <div id="donut" class="donut"></div>
-          <p class="muted small">Graphique indicatif basé sur les catégories enregistrées.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Encaisser un versement de copropriétaire</h3>
-      <label>Copropriétaire</label>
-      <select id="payOwner"></select>
-
-      <label>Montant versé</label>
-      <input id="payAmount" type="number" step="0.01" />
-
-      <label>Date</label>
-      <input id="payDate" type="date" />
-
-      <label>Commentaire</label>
-      <input id="payComment" placeholder="Ex : appel de fonds T3, régularisation..." />
-
-      <button class="btn green" onclick="addPayment()">Enregistrer le versement</button>
-    </div>
-
-    <div class="card">
-      <h3>Historique des versements</h3>
-      <div id="paymentsList"></div>
-    </div>
-  </section>
-
-  <section id="expense">
-    <div class="card">
-      <h3>Ajouter une dépense</h3>
-
-      <label>Libellé</label>
-      <input id="eLabel" placeholder="Ex : Assurance immeuble" />
-
-      <label>Montant</label>
-      <input id="eAmount" type="number" step="0.01" />
-
-      <label>Date de première échéance</label>
-      <input id="eDate" type="date" />
-
-      <label>Catégorie</label>
-      <select id="eCategory">
-        <option>Assurance</option>
-        <option>Banque</option>
-        <option>Énergie</option>
-        <option>Eau</option>
-        <option>Entretien</option>
-        <option>Travaux</option>
-        <option>Administratif</option>
-        <option>Autre</option>
-      </select>
-
-      <label>Fournisseur lié</label>
-      <select id="eSupplier"></select>
-
-      <label>Document justificatif lié</label>
-      <select id="eDocument"></select>
-      <p class="muted small">Tu peux lier une facture déjà référencée dans l’onglet Documents. Tu peux aussi ajouter la dépense sans document, puis faire le lien plus tard.</p>
-
-      <label>Mode de paiement</label>
-      <select id="ePaidBy">
-        <option value="bank">Payée par le compte bancaire</option>
-        <option value="owner">Avancée par un copropriétaire</option>
-      </select>
-
-      <div id="ownerAdvanceBlock" style="display:none">
-        <label>Copropriétaire ayant avancé</label>
-        <select id="eOwner"></select>
-      </div>
-
-      <label>
-        <input id="eRecurring" type="checkbox" style="width:auto;margin-right:6px" />
-        Programmer une récurrence
-      </label>
-
-      <div id="recBlock" style="display:none">
-        <label>Fréquence</label>
-        <select id="rFreq">
-          <option value="1">Mensuelle</option>
-          <option value="3">Trimestrielle</option>
-          <option value="12">Annuelle</option>
-        </select>
-
-        <label>Durée</label>
-        <select id="rMode">
-          <option value="count">Nombre d’échéances</option>
-          <option value="end">Jusqu’à une date de fin</option>
-        </select>
-
-        <div id="rCountBlock">
-          <label>Nombre d’échéances</label>
-          <input id="rCount" type="number" min="1" value="12" />
-        </div>
-
-        <div id="rEndBlock" style="display:none">
-          <label>Date de fin</label>
-          <input id="rEnd" type="date" />
-        </div>
-      </div>
-
-      <label>Commentaire</label>
-      <textarea id="eComment" placeholder="Facture, contrat, remarque utile..."></textarea>
-
-      <button class="btn" onclick="addExpense()">Ajouter la dépense</button>
-    </div>
-
-    <div class="card">
-      <h3>Lier un document à une dépense existante</h3>
-
-      <label>Dépense</label>
-      <select id="linkExpense"></select>
-
-      <label>Document à rattacher</label>
-      <select id="linkDocument"></select>
-
-      <button class="btn cyan" onclick="linkDocumentToExpense()">Lier le document</button>
-    </div>
-
-    <div class="card">
-      <h3>Historique des dépenses</h3>
-      <div id="expensesList"></div>
-    </div>
-  </section>
-
-  <section id="owners">
-    <div class="card">
-      <h3>Ajouter un lot / copropriétaire</h3>
-
-      <label>Nom du copropriétaire</label>
-      <input id="oName" placeholder="Ex : Teddy" />
-
-      <label>Lot</label>
-      <input id="oLot" placeholder="Ex : Lot 1" />
-
-      <label>Tantièmes</label>
-      <input id="oShares" type="number" step="0.01" />
-
-      <label>Solde initial</label>
-      <input id="oInitial" type="number" step="0.01" value="0" />
-
-      <button class="btn" onclick="addOwner()">Ajouter</button>
-    </div>
-
-    <div class="card">
-      <h3>Lots, tantièmes et soldes</h3>
-      <p class="muted">Solde positif : le copropriétaire est créditeur. Solde négatif : une régularisation ou un appel peut être nécessaire.</p>
-      <div id="ownersList"></div>
-    </div>
-  </section>
-
-  <section id="suppliers">
-    <div class="card">
-      <h3>Ajouter un fournisseur / contrat</h3>
-
-      <label>Nom</label>
-      <input id="sName" placeholder="Ex : Banque de Savoie, EDF, Assureur..." />
-
-      <label>Type</label>
-      <input id="sType" placeholder="Banque, assurance, énergie, entretien..." />
-
-      <label>Mensualité ou coût mensuel estimé</label>
-      <input id="sMonthly" type="number" step="0.01" />
-
-      <label>Prochaine échéance</label>
-      <input id="sNext" type="date" />
-
-      <label>Statut</label>
-      <select id="sStatus">
-        <option>Actif</option>
-        <option>À vérifier</option>
-        <option>À renégocier</option>
-        <option>À résilier</option>
-        <option>En attente</option>
-      </select>
-
-      <label>Notes</label>
-      <textarea id="sNotes" placeholder="Contact, référence contrat, vigilance..."></textarea>
-
-      <button class="btn" onclick="addSupplier()">Ajouter</button>
-    </div>
-
-    <div class="card">
-      <h3>Fournisseurs et contrats</h3>
-      <div id="suppliersList"></div>
-    </div>
-  </section>
-
-  <section id="calls">
-    <div class="card">
-      <h3>Générer un appel de fonds</h3>
-
-      <label>Libellé</label>
-      <input id="cTitle" placeholder="Ex : Appel de fonds septembre" />
-
-      <label>Montant total à répartir</label>
-      <input id="cAmount" type="number" step="0.01" />
-
-      <label>Date limite de paiement</label>
-      <input id="cDue" type="date" />
-
-      <button class="btn violet" onclick="generateCall()">Générer selon les tantièmes</button>
-    </div>
-
-    <div class="card">
-      <h3>Appels de fonds générés</h3>
-      <div id="callsList"></div>
-    </div>
-  </section>
-
-  <section id="tasks">
-    <div class="card">
-      <h3>Ajouter une action</h3>
-
-      <label>Action</label>
-      <input id="tLabel" placeholder="Ex : récupérer facture, contacter fournisseur..." />
-
-      <label>Responsable</label>
-      <input id="tOwner" placeholder="Ex : Président, copropriétaire..." />
-
-      <label>Échéance</label>
-      <input id="tDue" type="date" />
-
-      <label>Priorité</label>
-      <select id="tPriority">
-        <option>Normale</option>
-        <option>Haute</option>
-        <option>Critique</option>
-      </select>
-
-      <button class="btn" onclick="addTask()">Ajouter</button>
-    </div>
-
-    <div class="card">
-      <h3>Plan d’actions</h3>
-      <div id="tasksList"></div>
-    </div>
-  </section>
-
-  <section id="decisions">
-    <div class="card">
-      <h3>Consigner une décision</h3>
-
-      <label>Sujet</label>
-      <input id="dTitle" placeholder="Ex : choix assurance, ouverture compte..." />
-
-      <label>Date</label>
-      <input id="dDate" type="date" />
-
-      <label>Décision / contexte</label>
-      <textarea id="dText"></textarea>
-
-      <button class="btn" onclick="addDecision()">Enregistrer</button>
-    </div>
-
-    <div class="card">
-      <h3>Registre des décisions</h3>
-      <div id="decisionsList"></div>
-    </div>
-  </section>
-
-  <section id="documents">
-    <div class="card">
-      <h3>Ajouter un document</h3>
-      <p class="muted">
-        Tant que Google Drive n’est pas connecté, tu références ici les documents manuellement. Quand Drive sera connecté, ces informations serviront à rattacher les fichiers réels.
-      </p>
-
-      <label>Nom du document</label>
-      <input id="docName" placeholder="Ex : Facture EDF juin 2026.pdf" />
-
-      <label>Type</label>
-      <select id="docType">
-        <option>Facture</option>
-        <option>Contrat</option>
-        <option>Relevé bancaire</option>
-        <option>Appel de fonds</option>
-        <option>PV AG</option>
-        <option>Assurance</option>
-        <option>Travaux</option>
-        <option>Sinistre</option>
-        <option>Banque</option>
-        <option>Autre</option>
-      </select>
-
-      <label>Dossier Drive cible</label>
-      <select id="docFolder">
-        <option value="Administration/Règlement copropriété">Administration / Règlement copropriété</option>
-        <option value="Administration/Assurance">Administration / Assurance</option>
-        <option value="Administration/AG">Administration / AG</option>
-        <option value="Finances/2026/Factures">Finances / 2026 / Factures</option>
-        <option value="Finances/2026/Relevés bancaires">Finances / 2026 / Relevés bancaires</option>
-        <option value="Finances/2026/Appels de fonds">Finances / 2026 / Appels de fonds</option>
-        <option value="Fournisseurs/Banque de Savoie">Fournisseurs / Banque de Savoie</option>
-        <option value="Fournisseurs/Énergie">Fournisseurs / Énergie</option>
-        <option value="Fournisseurs/Assurance">Fournisseurs / Assurance</option>
-        <option value="Travaux/Devis">Travaux / Devis</option>
-        <option value="Travaux/Factures">Travaux / Factures</option>
-        <option value="Sinistres/Déclarations">Sinistres / Déclarations</option>
-        <option value="Sinistres/Expertises">Sinistres / Expertises</option>
-        <option value="Archives">Archives</option>
-      </select>
-
-      <label>Lien Drive ou emplacement provisoire</label>
-      <input id="docUrl" placeholder="Ex : lien Google Drive plus tard, ou note provisoire" />
-
-      <label>Dépense liée, facultatif</label>
-      <select id="docExpense"></select>
-
-      <label>Commentaire</label>
-      <textarea id="docComment" placeholder="Ex : facture à déposer plus tard, document reçu par mail..."></textarea>
-
-      <button class="btn" onclick="addDocument()">Ajouter le document</button>
-    </div>
-
-    <div class="card">
-      <h3>Documents référencés</h3>
-      <div id="documentsList"></div>
-    </div>
-  </section>
-
-  <section id="drive">
-    <div class="card">
-      <h3>Arborescence Google Drive cible</h3>
-      <span class="badge gray">Connexion non active</span>
-      <span class="badge orange">Visualisation préparée</span>
-      <p class="muted">
-        Cette vue présente l’arborescence qui sera utilisée sur Google Drive. Pour l’instant, elle est virtuelle. Les fichiers apparaissent ici selon leur dossier cible, mais ils ne sont pas encore synchronisés automatiquement.
-      </p>
-
-      <div id="driveTree" class="tree"></div>
-    </div>
-
-    <div class="card">
-      <h3>Vue par dossiers</h3>
-      <div id="folderView"></div>
-    </div>
-
-    <div class="card">
-      <h3>Modules Google Drive prévus</h3>
-      <div class="item">
-        <h4>Sauvegarde automatique</h4>
-        <p class="muted">Prévue, mais inactive tant que la connexion Google Drive n’est pas configurée.</p>
-      </div>
-      <div class="item">
-        <h4>Synchronisation multi-utilisateurs</h4>
-        <p class="muted">Prévue, mais inactive tant qu’un fichier partagé Drive n’est pas utilisé.</p>
-      </div>
-      <div class="item">
-        <h4>Justificatifs réels</h4>
-        <p class="muted">Prévu. Aujourd’hui, tu peux référencer le document et son dossier cible, mais pas encore téléverser automatiquement le fichier depuis l’application.</p>
-      </div>
-      <div class="item">
-        <h4>Liens entre documents et dépenses</h4>
-        <p class="muted">Actif localement. Le lien est déjà géré dans l’application, même sans Drive.</p>
-      </div>
-
-      <button class="btn light" disabled>Connecter Google Drive, module non activé</button>
-    </div>
-  </section>
-
-  <section id="settings">
-    <div class="card">
-      <h3>Réglages</h3>
-
-      <label>Nom de la copropriété</label>
-      <input id="setName" value="9 Passage Bellevue" />
-
-      <label>Banque</label>
-      <input id="setBank" value="Banque de Savoie" />
-
-      <label>Solde réel du compte bancaire</label>
-      <input id="setBalance" type="number" step="0.01" value="0" />
-
-      <button class="btn" onclick="saveSettings()">Enregistrer</button>
-    </div>
-
-    <div class="card">
-      <h3>Sauvegarde locale</h3>
-      <p class="muted">
-        Les données sont stockées dans le navigateur de l’appareil. Sans Google Drive, elles ne sont pas synchronisées avec un autre téléphone.
-      </p>
-
-      <button class="btn green" onclick="exportData()">Copier la sauvegarde JSON</button>
-
-      <label>Importer une sauvegarde JSON</label>
-      <textarea id="importBox" placeholder="Coller ici une sauvegarde JSON"></textarea>
-
-      <button class="btn orange" onclick="importData()">Importer</button>
-      <button class="btn red" onclick="resetApp()">Réinitialiser</button>
-    </div>
-  </section>
+
+<nav id="tabs">
+ <button class="active" data-tab="home">Accueil</button>
+ <button data-tab="owners">Copropriétaires</button>
+ <button data-tab="finance">Finances</button>
+ <button data-tab="documents">Documents</button>
+ <button data-tab="suppliers">Fournisseurs</button>
+ <button data-tab="works">Travaux</button>
+ <button data-tab="claims">Sinistres</button>
+ <button data-tab="settings">Réglages</button>
+</nav>
+
+<section id="home" class="active">
+
+<div class="card">
+
+<h2>🏠 Copropriété</h2>
+
+<div class="grid two">
+
+<div class="kpi">
+<span>Copropriétaires</span>
+<strong id="kOwners">0</strong>
+</div>
+
+<div class="kpi">
+<span>Documents</span>
+<strong id="kDocs">0</strong>
+</div>
+
+<div class="kpi">
+<span>Solde bancaire</span>
+<strong id="kBank">0 €</strong>
+</div>
+
+<div class="kpi">
+<span>Dépenses</span>
+<strong id="kExpenses">0</strong>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h3>✅ État de la copropriété</h3>
+<div id="homeStatus"></div>
+</div>
+
+<div class="card">
+<h3>📁 Répartition documentaire</h3>
+<div id="homeDocuments"></div>
+</div>
+
+</section>
+
+<section id="owners">
+
+<div class="card">
+
+<h3>Ajouter un copropriétaire</h3>
+
+<label>Nom</label>
+<input id="ownerName">
+
+<label>Lot</label>
+<input id="ownerLot">
+
+<label>Tantièmes</label>
+<input id="ownerShares" type="number">
+
+<button class="btn" onclick="addOwner()">
+Ajouter
+</button>
+
+</div>
+
+<div class="card">
+<h3>Liste des copropriétaires</h3>
+<div id="ownersList"></div>
+</div>
+
+</section>
+
+<section id="finance">
+
+<div class="card">
+
+<h3>Ajouter une dépense</h3>
+
+<label>Libellé</label>
+<input id="expenseLabel">
+
+<label>Montant</label>
+<input id="expenseAmount" type="number">
+
+<label>Date</label>
+<input id="expenseDate" type="date">
+
+<label>Catégorie</label>
+
+<select id="expenseCategory">
+<option>Assurance</option>
+<option>Banque</option>
+<option>Energie</option>
+<option>Eau</option>
+<option>Travaux</option>
+<option>Entretien</option>
+<option>Autre</option>
+</select>
+
+<label>Document lié</label>
+<select id="expenseDocument">
+<option value="">Aucun document</option>
+</select>
+
+<button class="btn" onclick="addExpense()">
+Ajouter la dépense
+</button>
+
+</div>
+
+<div class="card">
+<h3>Dépenses</h3>
+<div id="expensesList"></div>
+</div>
+
+</section>
+
+<section id="documents">
+
+<div class="card">
+
+<h3>Ajouter un document</h3>
+
+<label>Nom du document</label>
+<input id="docName">
+
+<label>Type</label>
+
+<select id="docType">
+<option>Facture</option>
+<option>Contrat</option>
+<option>Assurance</option>
+<option>PV AG</option>
+<option>Travaux</option>
+<option>Sinistre</option>
+<option>Autre</option>
+</select>
+
+<label>Dossier</label>
+
+<select id="docFolder">
+<option>Administration</option>
+<option>Finances</option>
+<option>Fournisseurs</option>
+<option>Travaux</option>
+<option>Sinistres</option>
+<option>Archives</option>
+</select>
+
+<label>Lien Drive (facultatif)</label>
+<input id="docUrl">
+
+<button class="btn"
+onclick="addDocument()">
+Ajouter le document
+</button>
+
+</div>
+
+<div class="card">
+<h3>Documents</h3>
+<div id="documentsList"></div>
+</div>
+
+<div class="card">
+<h3>Arborescence documentaire</h3>
+<div id="driveTree" class="tree"></div>
+</div>
+
+</section>
+
+<section id="suppliers">
+
+<div class="card">
+
+<h3>Ajouter un fournisseur</h3>
+
+<label>Nom</label>
+<input id="supplierName">
+
+<label>Type</label>
+<input id="supplierType">
+
+<button
+class="btn"
+onclick="addSupplier()">
+Ajouter
+</button>
+
+</div>
+
+<div class="card">
+<h3>Fournisseurs</h3>
+<div id="suppliersList"></div>
+</div>
+
+</section>
+<section id="works">
+
+<div class="card">
+
+<h3>Ajouter un projet travaux</h3>
+
+<label>Nom du projet</label>
+<input id="workName">
+
+<label>Budget estimé</label>
+<input id="workBudget" type="number">
+
+<button
+class="btn"
+onclick="addWork()">
+Ajouter
+</button>
+
+</div>
+
+<div class="card">
+<h3>Travaux</h3>
+<div id="worksList"></div>
+</div>
+
+</section>
+
+<section id="claims">
+
+<div class="card">
+
+<h3>Ajouter un sinistre</h3>
+
+<label>Libellé</label>
+<input id="claimLabel">
+
+<label>Date</label>
+<input id="claimDate" type="date">
+
+<button
+class="btn"
+onclick="addClaim()">
+Ajouter
+</button>
+
+</div>
+
+<div class="card">
+<h3>Sinistres</h3>
+<div id="claimsList"></div>
+</div>
+
+</section>
+
+<section id="settings">
+
+<div class="card">
+
+<h3>Paramètres</h3>
+
+<label>Nom de la copropriété</label>
+<input id="settingName">
+
+<label>Solde bancaire</label>
+<input id="settingBank" type="number">
+
+<button
+class="btn"
+onclick="saveSettings()">
+Enregistrer
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Sauvegarde JSON</h3>
+
+<button
+class="btn"
+onclick="exportData()">
+Exporter
+</button>
+
+<textarea
+id="importBox"
+placeholder="Coller ici une sauvegarde JSON">
+</textarea>
+
+<button
+class="btn"
+onclick="importData()">
+Importer
+</button>
+
+</div>
+
+</section>
+
 </main>
 
 <script>
-const KEY = "copro_9_passage_bellevue_v51";
-const OLD_KEY = "copro_9_passage_bellevue_v5";
 
-function id() {
-  return crypto && crypto.randomUUID ? crypto.randomUUID() : "id_" + Date.now() + "_" + Math.random().toString(36).slice(2);
-}
+const STORAGE_KEY="copro_v52_light";
 
-function money(v) {
-  return Number(v || 0).toLocaleString("fr-FR", { style:"currency", currency:"EUR" });
-}
+let data={
+ settings:{
+  name:"9 Passage Bellevue",
+  bank:0
+ },
 
-function esc(v) {
-  return String(v || "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-function fdate(v) {
-  if (!v) return "Non renseigné";
-  return new Date(v + "T00:00:00").toLocaleDateString("fr-FR");
-}
-
-function today() {
-  return new Date().toISOString().slice(0,10);
-}
-
-function addMonths(ds, m) {
-  let d = new Date(ds + "T00:00:00");
-  let day = d.getDate();
-  d.setMonth(d.getMonth() + Number(m));
-  if (d.getDate() < day) d.setDate(0);
-  return d.toISOString().slice(0,10);
-}
-
-const baseFolders = [
-  "Administration/Règlement copropriété",
-  "Administration/Assurance",
-  "Administration/AG",
-  "Finances/2026/Factures",
-  "Finances/2026/Relevés bancaires",
-  "Finances/2026/Appels de fonds",
-  "Fournisseurs/Banque de Savoie",
-  "Fournisseurs/Énergie",
-  "Fournisseurs/Assurance",
-  "Travaux/Devis",
-  "Travaux/Factures",
-  "Sinistres/Déclarations",
-  "Sinistres/Expertises",
-  "Archives"
-];
-
-const empty = {
-  settings: {
-    name:"9 Passage Bellevue",
-    bank:"Banque de Savoie",
-    bankBalance:0,
-    driveConnected:false
-  },
-  owners:[],
-  suppliers:[
-    {
-      id:id(),
-      name:"Banque de Savoie",
-      type:"Banque",
-      monthly:0,
-      next:"",
-      status:"Actif",
-      notes:"Compte bancaire de la copropriété."
-    }
-  ],
-  expenses:[],
-  payments:[],
-  calls:[],
-  tasks:[
-    {
-      id:id(),
-      label:"Recenser les copropriétaires, lots et tantièmes",
-      owner:"Président du syndic",
-      due:"",
-      priority:"Haute",
-      done:false
-    },
-    {
-      id:id(),
-      label:"Référencer les contrats et fournisseurs existants",
-      owner:"Président du syndic",
-      due:"",
-      priority:"Haute",
-      done:false
-    },
-    {
-      id:id(),
-      label:"Mettre en place une routine de sauvegarde JSON",
-      owner:"Président du syndic",
-      due:"",
-      priority:"Normale",
-      done:false
-    }
-  ],
-  decisions:[],
-  documents:[],
-  drive:{
-    prepared:true,
-    backup:false,
-    sync:false,
-    documents:false,
-    rights:false,
-    folders:baseFolders
-  }
+ owners:[],
+ expenses:[],
+ documents:[],
+ suppliers:[],
+ works:[],
+ claims:[]
 };
 
-let data = load();
+load();
 
-function normalizeData(p) {
-  const n = {
-    ...structuredClone(empty),
-    ...p,
-    settings:{...empty.settings, ...(p.settings || {})},
-    drive:{...empty.drive, ...(p.drive || {})}
-  };
+function load(){
 
-  n.expenses = (n.expenses || []).map(e => ({
-    ...e,
-    documentIds:Array.isArray(e.documentIds) ? e.documentIds : (e.documentId ? [e.documentId] : [])
-  }));
+ const saved=
+ localStorage.getItem(STORAGE_KEY);
 
-  n.documents = (n.documents || []).map(d => ({
-    ...d,
-    id:d.id || id(),
-    folder:d.folder || d.drivePath || "Archives",
-    url:d.url || d.place || "",
-    linkedExpenseIds:Array.isArray(d.linkedExpenseIds) ? d.linkedExpenseIds : []
-  }));
+ if(saved){
 
-  n.drive.folders = Array.from(new Set([...(n.drive.folders || []), ...baseFolders]));
-  return n;
+   data=
+   JSON.parse(saved);
+
+ }
+
+ render();
+
 }
 
-function load() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (raw) return normalizeData(JSON.parse(raw));
+function save(){
 
-    const old = localStorage.getItem(OLD_KEY);
-    if (old) return normalizeData(JSON.parse(old));
+ localStorage.setItem(
+   STORAGE_KEY,
+   JSON.stringify(data)
+ );
 
-    return structuredClone(empty);
-  } catch(e) {
-    return structuredClone(empty);
+ render();
+
+}
+
+function uid(){
+
+ return Date.now()+
+ Math.random();
+
+}
+
+function money(v){
+
+ return Number(v||0)
+ .toLocaleString(
+  "fr-FR",
+  {
+   style:"currency",
+   currency:"EUR"
   }
+ );
+
 }
 
-function save() {
-  localStorage.setItem(KEY, JSON.stringify(data));
-  render();
+function addOwner(){
+
+ if(!ownerName.value){
+   return;
+ }
+
+ data.owners.push({
+   id:uid(),
+   name:ownerName.value,
+   lot:ownerLot.value,
+   shares:Number(ownerShares.value||0)
+ });
+
+ ownerName.value="";
+ ownerLot.value="";
+ ownerShares.value="";
+
+ save();
+
 }
 
-function totalShares() {
-  return data.owners.reduce((s,o) => s + Number(o.shares || 0), 0);
+function addExpense(){
+
+ if(!expenseLabel.value){
+   return;
+ }
+
+ data.expenses.push({
+   id:uid(),
+   label:expenseLabel.value,
+   amount:Number(expenseAmount.value||0),
+   date:expenseDate.value,
+   category:expenseCategory.value,
+   documentId:expenseDocument.value
+ });
+
+ expenseLabel.value="";
+ expenseAmount.value="";
+ expenseDate.value="";
+
+ save();
+
 }
 
-function expenseTotal() {
-  return data.expenses.reduce((s,e) => s + Number(e.amount || 0), 0);
+function addDocument(){
+
+ if(!docName.value){
+   return;
+ }
+
+ data.documents.push({
+   id:uid(),
+   name:docName.value,
+   type:docType.value,
+   folder:docFolder.value,
+   url:docUrl.value
+ });
+
+ docName.value="";
+ docUrl.value="";
+
+ save();
+
 }
 
-function futureExpenses() {
-  const t = today();
-  return data.expenses
-    .filter(e => e.date >= t)
-    .reduce((s,e) => s + Number(e.amount || 0), 0);
+function addSupplier(){
+
+ if(!supplierName.value){
+   return;
+ }
+
+ data.suppliers.push({
+   id:uid(),
+   name:supplierName.value,
+   type:supplierType.value
+ });
+
+ supplierName.value="";
+ supplierType.value="";
+
+ save();
+
 }
 
-function ownerBalances() {
-  const ts = totalShares();
-  const b = {};
+function addWork(){
 
-  data.owners.forEach(o => b[o.id] = Number(o.initial || 0));
+ if(!workName.value){
+   return;
+ }
 
-  data.payments.forEach(p => {
-    if (b[p.ownerId] != null) b[p.ownerId] += Number(p.amount || 0);
-  });
+ data.works.push({
+   id:uid(),
+   name:workName.value,
+   budget:Number(workBudget.value||0)
+ });
 
-  data.expenses.forEach(e => {
-    const a = Number(e.amount || 0);
+ workName.value="";
+ workBudget.value="";
 
-    if (e.paidBy === "owner" && b[e.ownerId] != null) {
-      b[e.ownerId] += a;
+ save();
+
+}
+
+function addClaim(){
+
+ if(!claimLabel.value){
+   return;
+ }
+
+ data.claims.push({
+   id:uid(),
+   label:claimLabel.value,
+   date:claimDate.value
+ });
+
+ claimLabel.value="";
+ claimDate.value="";
+
+ save();
+
+}
+
+function saveSettings(){
+
+ data.settings.name=
+ settingName.value;
+
+ data.settings.bank=
+ Number(settingBank.value||0);
+
+ save();
+
+}
+
+function exportData(){
+
+ prompt(
+  "Copier la sauvegarde",
+  JSON.stringify(data)
+ );
+
+}
+
+function importData(){
+
+ try{
+
+   data=
+   JSON.parse(
+      importBox.value
+   );
+
+   save();
+
+ }catch{
+
+   alert(
+    "JSON invalide"
+   );
+
+ }
+
+}
+
+function buildTree(){
+
+ const folders={};
+
+ data.documents.forEach(d=>{
+
+    if(!folders[d.folder]){
+
+      folders[d.folder]=[];
+
     }
 
-    if (ts > 0) {
-      data.owners.forEach(o => {
-        b[o.id] -= a * (Number(o.shares || 0) / ts);
-      });
-    }
-  });
+    folders[d.folder]
+    .push(d.name);
 
-  return b;
+ });
+
+ let txt="";
+
+ Object.keys(folders)
+ .forEach(folder=>{
+
+     txt+="📁 "+folder+"\\n";
+
+     folders[folder]
+     .forEach(doc=>{
+
+       txt+="   📄 "
+       +doc+
+       "\\n";
+
+     });
+
+ });
+
+ return txt;
+
 }
 
-function addOwner() {
-  const name = oName.value.trim();
-  const lot = oLot.value.trim();
-  const shares = Number(oShares.value || 0);
-  const initial = Number(oInitial.value || 0);
+function render(){
 
-  if (!name || !lot || !shares) {
-    alert("Renseigne au minimum le nom, le lot et les tantièmes.");
-    return;
-  }
+ coproNameHeader.textContent=
+ data.settings.name;
 
-  data.owners.push({id:id(), name, lot, shares, initial});
-  oName.value = "";
-  oLot.value = "";
-  oShares.value = "";
-  oInitial.value = 0;
-  save();
+ settingName.value=
+ data.settings.name;
+
+ settingBank.value=
+ data.settings.bank;
+
+ kOwners.textContent=
+ data.owners.length;
+
+ kDocs.textContent=
+ data.documents.length;
+
+ kBank.textContent=
+ money(
+  data.settings.bank
+ );
+
+ kExpenses.textContent=
+ data.expenses.length;
+
+ homeStatus.innerHTML=
+ `
+ <div class="item">
+ ✅ ${
+ data.owners.length
+ ? "Copropriétaires renseignés"
+ : "Aucun copropriétaire"
+ }
+ </div>
+
+ <div class="item">
+ ✅ ${
+ data.documents.length
+ ? "Documents référencés"
+ : "Aucun document"
+ }
+ </div>
+
+ <div class="item">
+ ✅ ${
+ data.suppliers.length
+ ? "Fournisseurs renseignés"
+ : "Aucun fournisseur"
+ }
+ </div>
+ `;
+
+ const folders={};
+
+ data.documents.forEach(d=>{
+
+   folders[d.folder]=
+   (folders[d.folder]||0)+1;
+
+ });
+
+ homeDocuments.innerHTML=
+ Object.entries(folders)
+ .map(
+   ([k,v])=>
+   `
+   <div class="item">
+      📁 ${k}
+      (${v})
+   </div>
+   `
+ ).join("");
+
+ ownersList.innerHTML=
+ data.owners.map(
+  o=>`
+   <div class="item">
+   <h4>${o.name}</h4>
+   Lot : ${o.lot}
+   <br>
+   ${o.shares} tantièmes
+   </div>
+  `
+ ).join("");
+
+ expenseDocument.innerHTML=
+ `<option value="">
+ Aucun document
+ </option>`+
+ data.documents.map(
+  d=>`
+  <option value="${d.id}">
+   ${d.name}
+  </option>`
+ ).join("");
+
+ expensesList.innerHTML=
+ data.expenses.map(
+ e=>`
+ <div class="item">
+  <h4>${e.label}</h4>
+  ${money(e.amount)}
+  <br>
+  ${e.category}
+ </div>
+ `
+ ).join("");
+
+ documentsList.innerHTML=
+ data.documents.map(
+ d=>`
+ <div class="item">
+  <h4>${d.name}</h4>
+
+  <span class="badge">
+  ${d.type}
+  </span>
+
+  <span class="badge">
+  ${d.folder}
+  </span>
+
+ </div>
+ `
+ ).join("");
+
+ suppliersList.innerHTML=
+ data.suppliers.map(
+ s=>`
+ <div class="item">
+   ${s.name}
+   <br>
+   ${s.type}
+ </div>
+ `
+ ).join("");
+
+ worksList.innerHTML=
+ data.works.map(
+ w=>`
+ <div class="item">
+   ${w.name}
+   <br>
+   Budget :
+   ${money(w.budget)}
+ </div>
+ `
+ ).join("");
+
+ claimsList.innerHTML=
+ data.claims.map(
+ s=>`
+ <div class="item">
+  ${s.label}
+  <br>
+  ${s.date}
+ </div>
+ `
+ ).join("");
+
+ driveTree.textContent=
+ buildTree();
+
 }
 
-function addSupplier() {
-  const name = sName.value.trim();
+document
+.querySelectorAll(
+"nav button"
+)
+.forEach(btn=>{
+
+ btn.onclick=()=>{
+
+   document
+   .querySelectorAll(
+   "nav button"
+   )
+   .forEach(
+   b=>b.classList.remove(
+   "active"
+   )
+   );
+
+   document
+   .querySelectorAll(
+   "section"
+   )
+   .forEach(
+   s=>s.classList.remove(
+   "active"
+   )
+   );
+
+   btn.classList.add(
+   "active"
+   );
+
+   document
+   .getElementById(
+   btn.dataset.tab
+   )
+   .classList.add(
+   "active"
+   );
+
+ };
 
-  if (!name) {
-    alert("Renseigne le nom du fournisseur.");
-    return;
-  }
-
-  data.suppliers.push({
-    id:id(),
-    name,
-    type:sType.value.trim(),
-    monthly:Number(sMonthly.value || 0),
-    next:sNext.value,
-    status:sStatus.value,
-    notes:sNotes.value.trim()
-  });
-
-  sName.value = "";
-  sType.value = "";
-  sMonthly.value = "";
-  sNext.value = "";
-  sNotes.value = "";
-  save();
-}
-
-function addExpense() {
-  const label = eLabel.value.trim();
-  const amount = Number(eAmount.value || 0);
-  const date = eDate.value;
-
-  if (!label || !amount || !date) {
-    alert("Renseigne le libellé, le montant et la date.");
-    return;
-  }
-
-  if (ePaidBy.value === "owner" && !eOwner.value) {
-    alert("Sélectionne le copropriétaire qui a avancé la dépense.");
-    return;
-  }
-
-  const selectedDoc = eDocument.value;
-  const recurring = eRecurring.checked;
-  const group = recurring ? id() : null;
-  let count = 1;
-  let step = 1;
-
-  if (recurring) {
-    step = Number(rFreq.value);
-
-    if (rMode.value === "count") {
-      count = Number(rCount.value || 1);
-    } else {
-      if (!rEnd.value) {
-        alert("Renseigne une date de fin.");
-        return;
-      }
-
-      count = 0;
-      let d = date;
-
-      while (d <= rEnd.value && count < 120) {
-        count++;
-        d = addMonths(d, step);
-      }
-    }
-  }
-
-  const createdExpenseIds = [];
-
-  for (let i = 0; i < count; i++) {
-    const expenseId = id();
-
-    data.expenses.push({
-      id:expenseId,
-      label,
-      amount,
-      date:addMonths(date, i * step),
-      category:eCategory.value,
-      supplierId:eSupplier.value,
-      paidBy:ePaidBy.value,
-      ownerId:ePaidBy.value === "owner" ? eOwner.value : "",
-      comment:eComment.value.trim(),
-      recurring,
-      group,
-      occ:i + 1,
-      total:count,
-      recurrence:recurring ? (step === 1 ? "Mensuelle" : step === 3 ? "Trimestrielle" : "Annuelle") : "",
-      documentIds:selectedDoc ? [selectedDoc] : []
-    });
-
-    createdExpenseIds.push(expenseId);
-  }
-
-  if (selectedDoc) {
-    const doc = data.documents.find(d => d.id === selectedDoc);
-    if (doc) {
-      createdExpenseIds.forEach(eid => {
-        if (!doc.linkedExpenseIds.includes(eid)) doc.linkedExpenseIds.push(eid);
-      });
-    }
-  }
-
-  eLabel.value = "";
-  eAmount.value = "";
-  eDate.value = "";
-  eComment.value = "";
-  eRecurring.checked = false;
-  recBlock.style.display = "none";
-  save();
-}
-
-function addPayment() {
-  if (!payOwner.value || !Number(payAmount.value || 0)) {
-    alert("Sélectionne un copropriétaire et un montant.");
-    return;
-  }
-
-  data.payments.push({
-    id:id(),
-    ownerId:payOwner.value,
-    amount:Number(payAmount.value || 0),
-    date:payDate.value || today(),
-    comment:payComment.value.trim()
-  });
-
-  payAmount.value = "";
-  payComment.value = "";
-  payDate.value = "";
-  save();
-}
-
-function generateCall() {
-  const title = cTitle.value.trim();
-  const amount = Number(cAmount.value || 0);
-  const due = cDue.value;
-  const ts = totalShares();
-
-  if (!title || !amount || !due) {
-    alert("Renseigne le libellé, le montant et la date limite.");
-    return;
-  }
-
-  if (ts <= 0 || data.owners.length === 0) {
-    alert("Ajoute d’abord les copropriétaires et leurs tantièmes.");
-    return;
-  }
-
-  const lines = data.owners.map(o => ({
-    ownerId:o.id,
-    amount:amount * (Number(o.shares || 0) / ts),
-    paid:false
-  }));
-
-  data.calls.push({
-    id:id(),
-    title,
-    amount,
-    due,
-    lines,
-    created:today()
-  });
-
-  cTitle.value = "";
-  cAmount.value = "";
-  cDue.value = "";
-  save();
-}
-
-function addTask() {
-  const label = tLabel.value.trim();
-
-  if (!label) {
-    alert("Renseigne l’action.");
-    return;
-  }
-
-  data.tasks.push({
-    id:id(),
-    label,
-    owner:tOwner.value.trim(),
-    due:tDue.value,
-    priority:tPriority.value,
-    done:false
-  });
-
-  tLabel.value = "";
-  tOwner.value = "";
-  tDue.value = "";
-  save();
-}
-
-function toggleTask(x) {
-  const t = data.tasks.find(a => a.id === x);
-  if (t) t.done = !t.done;
-  save();
-}
-
-function addDecision() {
-  const title = dTitle.value.trim();
-
-  if (!title) {
-    alert("Renseigne le sujet.");
-    return;
-  }
-
-  data.decisions.push({
-    id:id(),
-    title,
-    date:dDate.value,
-    text:dText.value.trim()
-  });
-
-  dTitle.value = "";
-  dDate.value = "";
-  dText.value = "";
-  save();
-}
-
-function addDocument() {
-  const name = docName.value.trim();
-
-  if (!name) {
-    alert("Renseigne le nom du document.");
-    return;
-  }
-
-  const documentId = id();
-  const expenseId = docExpense.value;
-
-  const newDoc = {
-    id:documentId,
-    name,
-    type:docType.value,
-    folder:docFolder.value,
-    url:docUrl.value.trim(),
-    comment:docComment.value.trim(),
-    driveStatus:"Non synchronisé",
-    created:today(),
-    linkedExpenseIds:expenseId ? [expenseId] : []
-  };
-
-  data.documents.push(newDoc);
-
-  if (!data.drive.folders.includes(newDoc.folder)) {
-    data.drive.folders.push(newDoc.folder);
-  }
-
-  if (expenseId) {
-    const exp = data.expenses.find(e => e.id === expenseId);
-    if (exp) {
-      exp.documentIds = exp.documentIds || [];
-      if (!exp.documentIds.includes(documentId)) exp.documentIds.push(documentId);
-    }
-  }
-
-  docName.value = "";
-  docUrl.value = "";
-  docComment.value = "";
-  save();
-}
-
-function linkDocumentToExpense() {
-  const expenseId = linkExpense.value;
-  const documentId = linkDocument.value;
-
-  if (!expenseId || !documentId) {
-    alert("Sélectionne une dépense et un document.");
-    return;
-  }
-
-  const exp = data.expenses.find(e => e.id === expenseId);
-  const doc = data.documents.find(d => d.id === documentId);
-
-  if (!exp || !doc) {
-    alert("Dépense ou document introuvable.");
-    return;
-  }
-
-  exp.documentIds = exp.documentIds || [];
-  doc.linkedExpenseIds = doc.linkedExpenseIds || [];
-
-  if (!exp.documentIds.includes(documentId)) exp.documentIds.push(documentId);
-  if (!doc.linkedExpenseIds.includes(expenseId)) doc.linkedExpenseIds.push(expenseId);
-
-  save();
-}
-
-function unlinkDocumentFromExpense(expenseId, documentId) {
-  const exp = data.expenses.find(e => e.id === expenseId);
-  const doc = data.documents.find(d => d.id === documentId);
-
-  if (!exp || !doc) return;
-
-  exp.documentIds = (exp.documentIds || []).filter(x => x !== documentId);
-  doc.linkedExpenseIds = (doc.linkedExpenseIds || []).filter(x => x !== expenseId);
-
-  save();
-}
-
-function saveSettings() {
-  data.settings.name = setName.value.trim() || "9 Passage Bellevue";
-  data.settings.bank = setBank.value.trim() || "Banque de Savoie";
-  data.settings.bankBalance = Number(setBalance.value || 0);
-  save();
-}
-
-function del(col, x) {
-  if (!confirm("Confirmer la suppression ?")) return;
-
-  if (col === "documents") {
-    data.expenses.forEach(e => {
-      e.documentIds = (e.documentIds || []).filter(did => did !== x);
-    });
-  }
-
-  if (col === "expenses") {
-    data.documents.forEach(d => {
-      d.linkedExpenseIds = (d.linkedExpenseIds || []).filter(eid => eid !== x);
-    });
-  }
-
-  data[col] = data[col].filter(a => a.id !== x);
-  save();
-}
-
-function exportData() {
-  const txt = JSON.stringify(data, null, 2);
-
-  navigator.clipboard.writeText(txt)
-    .then(() => alert("Sauvegarde JSON copiée."))
-    .catch(() => prompt("Copie cette sauvegarde JSON :", txt));
-}
-
-function importData() {
-  try {
-    data = normalizeData(JSON.parse(importBox.value));
-    save();
-    alert("Import terminé.");
-  } catch(e) {
-    alert("JSON invalide.");
-  }
-}
-
-function resetApp() {
-  if (!confirm("Tout supprimer sur cet appareil ?")) return;
-  localStorage.removeItem(KEY);
-  data = structuredClone(empty);
-  save();
-}
-
-function renderSelects() {
-  eSupplier.innerHTML = '<option value="">Aucun</option>' +
-    data.suppliers.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
-
-  eOwner.innerHTML = '<option value="">Sélectionner</option>' +
-    data.owners.map(o => `<option value="${o.id}">${esc(o.name)} - ${esc(o.lot)}</option>`).join("");
-
-  payOwner.innerHTML = '<option value="">Sélectionner</option>' +
-    data.owners.map(o => `<option value="${o.id}">${esc(o.name)} - ${esc(o.lot)}</option>`).join("");
-
-  eDocument.innerHTML = '<option value="">Aucun document lié</option>' +
-    data.documents.map(d => `<option value="${d.id}">${esc(d.name)} - ${esc(d.folder)}</option>`).join("");
-
-  docExpense.innerHTML = '<option value="">Aucune dépense liée</option>' +
-    data.expenses
-      .slice()
-      .sort((a,b) => b.date.localeCompare(a.date))
-      .map(e => `<option value="${e.id}">${esc(e.label)} - ${money(e.amount)} - ${fdate(e.date)}</option>`)
-      .join("");
-
-  linkExpense.innerHTML = '<option value="">Sélectionner une dépense</option>' +
-    data.expenses
-      .slice()
-      .sort((a,b) => b.date.localeCompare(a.date))
-      .map(e => `<option value="${e.id}">${esc(e.label)} - ${money(e.amount)} - ${fdate(e.date)}</option>`)
-      .join("");
-
-  linkDocument.innerHTML = '<option value="">Sélectionner un document</option>' +
-    data.documents
-      .slice()
-      .sort((a,b) => a.name.localeCompare(b.name))
-      .map(d => `<option value="${d.id}">${esc(d.name)} - ${esc(d.folder)}</option>`)
-      .join("");
-}
-
-function renderHome() {
-  const bank = Number(data.settings.bankBalance || 0);
-  const theo = bank - expenseTotal();
-  const bal = ownerBalances();
-  const due = Math.abs(Object.values(bal).filter(v => v < 0).reduce((s,v) => s + v, 0));
-  const noDoc = data.expenses.filter(e => !e.documentIds || e.documentIds.length === 0).length;
-
-  kBank.textContent = money(bank);
-  kTheo.textContent = money(theo);
-  kFuture.textContent = money(futureExpenses());
-  kDue.textContent = money(due);
-  kDocs.textContent = data.documents.length;
-  kNoDoc.textContent = noDoc;
-
-  const a = [];
-
-  if (data.owners.length === 0) a.push("Ajouter les lots, copropriétaires et tantièmes.");
-  if (data.suppliers.length <= 1) a.push("Compléter la liste des fournisseurs et contrats.");
-  if (data.documents.length === 0) a.push("Référencer les documents clés de la copropriété.");
-  if (noDoc > 0) a.push(noDoc + " dépense(s) sans justificatif lié.");
-  if (data.tasks.some(t => !t.done)) a.push(data.tasks.filter(t => !t.done).length + " action(s) ouverte(s).");
-  if (!data.settings.driveConnected) a.push("Google Drive non connecté : les fichiers sont seulement référencés localement.");
-
-  alerts.innerHTML = a.length
-    ? a.map(x => `<div class="item"><span class="badge orange">À suivre</span><p>${esc(x)}</p></div>`).join("")
-    : `<p class="positive">Aucune alerte opérationnelle majeure.</p>`;
-
-  const events = [
-    ...data.expenses
-      .filter(e => e.date >= today())
-      .map(e => ({date:e.date, label:"Dépense : " + e.label, amount:e.amount})),
-    ...data.suppliers
-      .filter(s => s.next && s.next >= today())
-      .map(s => ({date:s.next, label:"Échéance fournisseur : " + s.name, amount:s.monthly})),
-    ...data.tasks
-      .filter(t => !t.done && t.due && t.due >= today())
-      .map(t => ({date:t.due, label:"Action : " + t.label, amount:null}))
-  ].sort((a,b) => a.date.localeCompare(b.date)).slice(0,8);
-
-  nextEvents.innerHTML = events.length
-    ? events.map(e => `<div class="item"><h4>${esc(e.label)}</h4><p class="muted">${fdate(e.date)} ${e.amount != null ? " - " + money(e.amount) : ""}</p></div>`).join("")
-    : `<p class="muted">Aucune échéance future enregistrée.</p>`;
-}
-
-function renderFinance() {
-  const totals = {};
-  data.expenses.forEach(e => totals[e.category] = (totals[e.category] || 0) + Number(e.amount || 0));
-
-  const entries = Object.entries(totals).sort((a,b) => b[1] - a[1]);
-  const max = Math.max(1, ...entries.map(x => x[1]));
-
-  categoryBars.innerHTML = entries.length
-    ? entries.map(([c,v]) => `
-      <div class="barRow">
-        <div class="barLabel">${esc(c)}</div>
-        <div class="barWrap"><div class="bar" style="width:${Math.round(v / max * 100)}%"></div></div>
-        <div class="amount">${money(v)}</div>
-      </div>
-    `).join("")
-    : `<p class="muted">Aucune dépense.</p>`;
-
-  const colors = ["#1769aa","#00a896","#f59e0b","#dc2626","#7c3aed","#14b8a6","#fb7185"];
-  const sum = entries.reduce((s,e) => s + e[1], 0);
-  let start = 0;
-  const parts = [];
-
-  entries.forEach((e,i) => {
-    const end = start + (e[1] / sum * 100 || 0);
-    parts.push(`${colors[i % colors.length]} ${start}% ${end}%`);
-    start = end;
-  });
-
-  donut.style.background = parts.length ? `conic-gradient(${parts.join(",")})` : "conic-gradient(#e5e7eb 0 100%)";
-
-  paymentsList.innerHTML = data.payments.length
-    ? data.payments.slice().sort((a,b) => b.date.localeCompare(a.date)).map(p => {
-      const o = data.owners.find(x => x.id === p.ownerId);
-      return `
-        <div class="item">
-          <h4>${esc(o ? o.name : "Copropriétaire")} - ${money(p.amount)}</h4>
-          <p class="muted">${fdate(p.date)}<br>${esc(p.comment)}</p>
-          <div class="actions"><button onclick="del('payments','${p.id}')">Supprimer</button></div>
-        </div>
-      `;
-    }).join("")
-    : `<p class="muted">Aucun versement enregistré.</p>`;
-}
-
-function renderExpenses() {
-  expensesList.innerHTML = data.expenses.length
-    ? data.expenses.slice().sort((a,b) => b.date.localeCompare(a.date)).map(e => {
-      const s = data.suppliers.find(x => x.id === e.supplierId);
-      const o = data.owners.find(x => x.id === e.ownerId);
-      const docs = (e.documentIds || []).map(did => data.documents.find(d => d.id === did)).filter(Boolean);
-
-      const docsHtml = docs.length
-        ? docs.map(d => `
-          <div class="item">
-            <span class="badge cyan">Justificatif</span>
-            ${documentDisplay(d)}
-            <div class="actions">
-              <button onclick="unlinkDocumentFromExpense('${e.id}','${d.id}')">Délier</button>
-            </div>
-          </div>
-        `).join("")
-        : `<p class="muted"><span class="badge red">Aucun justificatif lié</span></p>`;
-
-      return `
-        <div class="item">
-          <h4>${esc(e.label)} - ${money(e.amount)}</h4>
-          <span class="badge">${esc(e.category)}</span>
-          ${e.recurring ? `<span class="badge green">${esc(e.recurrence)} ${e.occ}/${e.total}</span>` : ""}
-          <p class="muted">
-            Date : ${fdate(e.date)}<br>
-            Fournisseur : ${s ? esc(s.name) : "Non lié"}<br>
-            Paiement : ${e.paidBy === "owner" ? "Avance par " + (o ? esc(o.name) : "copropriétaire") : "Compte bancaire"}<br>
-            ${e.comment ? "Note : " + esc(e.comment) : ""}
-          </p>
-          ${docsHtml}
-          <div class="actions"><button onclick="del('expenses','${e.id}')">Supprimer</button></div>
-        </div>
-      `;
-    }).join("")
-    : `<p class="muted">Aucune dépense enregistrée.</p>`;
-}
-
-function renderOwners() {
-  const b = ownerBalances();
-
-  ownersList.innerHTML = data.owners.length
-    ? data.owners.map(o => {
-      const sol = b[o.id] || 0;
-      return `
-        <div class="item">
-          <h4>${esc(o.name)}</h4>
-          <span class="badge">${esc(o.lot)}</span>
-          <span class="badge violet">${Number(o.shares || 0)} tantièmes</span>
-          <p class="muted">Solde : <span class="${sol >= 0 ? "positive" : "negative"}">${money(sol)}</span></p>
-          <div class="actions"><button onclick="del('owners','${o.id}')">Supprimer</button></div>
-        </div>
-      `;
-    }).join("")
-    : `<p class="muted">Aucun lot enregistré.</p>`;
-}
-
-function renderSuppliers() {
-  suppliersList.innerHTML = data.suppliers.length
-    ? data.suppliers.map(s => `
-      <div class="item">
-        <h4>${esc(s.name)}</h4>
-        <span class="badge">${esc(s.type || "Non catégorisé")}</span>
-        <span class="badge ${s.status === "Actif" ? "green" : "orange"}">${esc(s.status)}</span>
-        <p class="muted">
-          Mensualité estimée : ${money(s.monthly)}<br>
-          Prochaine échéance : ${fdate(s.next)}<br>
-          ${esc(s.notes)}
-        </p>
-        <div class="actions"><button onclick="del('suppliers','${s.id}')">Supprimer</button></div>
-      </div>
-    `).join("")
-    : `<p class="muted">Aucun fournisseur enregistré.</p>`;
-}
-
-function renderCalls() {
-  callsList.innerHTML = data.calls.length
-    ? data.calls.slice().sort((a,b) => b.created.localeCompare(a.created)).map(c => {
-      const lines = c.lines.map(l => {
-        const o = data.owners.find(x => x.id === l.ownerId);
-        return `
-          <div class="item">
-            <strong>${esc(o ? o.name : "Copropriétaire")}</strong>
-            <p class="muted">${money(l.amount)} à régler avant le ${fdate(c.due)}</p>
-          </div>
-        `;
-      }).join("");
-
-      return `
-        <div class="item">
-          <h4>${esc(c.title)} - ${money(c.amount)}</h4>
-          <span class="badge violet">Répartition par tantièmes</span>
-          <p class="muted">Créé le ${fdate(c.created)}. Échéance : ${fdate(c.due)}</p>
-          ${lines}
-          <div class="actions"><button onclick="del('calls','${c.id}')">Supprimer</button></div>
-        </div>
-      `;
-    }).join("")
-    : `<p class="muted">Aucun appel de fonds généré.</p>`;
-}
-
-function renderTasks() {
-  tasksList.innerHTML = data.tasks.length
-    ? data.tasks.slice().sort((a,b) => (a.done - b.done) || ((a.due || "9999").localeCompare(b.due || "9999"))).map(t => `
-      <div class="item">
-        <h4>${t.done ? "✅ " : ""}${esc(t.label)}</h4>
-        <span class="badge ${t.priority === "Critique" ? "red" : t.priority === "Haute" ? "orange" : "gray"}">${esc(t.priority)}</span>
-        <p class="muted">
-          Responsable : ${esc(t.owner || "Non renseigné")}<br>
-          Échéance : ${fdate(t.due)}
-        </p>
-        <div class="actions">
-          <button onclick="toggleTask('${t.id}')">${t.done ? "Rouvrir" : "Terminer"}</button>
-          <button onclick="del('tasks','${t.id}')">Supprimer</button>
-        </div>
-      </div>
-    `).join("")
-    : `<p class="muted">Aucune action.</p>`;
-}
-
-function renderDecisions() {
-  decisionsList.innerHTML = data.decisions.length
-    ? data.decisions.slice().sort((a,b) => (b.date || "").localeCompare(a.date || "")).map(d => `
-      <div class="item">
-        <h4>${esc(d.title)}</h4>
-        <span class="badge">${fdate(d.date)}</span>
-        <p class="muted">${esc(d.text || "Aucun détail.")}</p>
-        <div class="actions"><button onclick="del('decisions','${d.id}')">Supprimer</button></div>
-      </div>
-    `).join("")
-    : `<p class="muted">Aucune décision enregistrée.</p>`;
-}
-
-function documentDisplay(d) {
-  const linkedExpenses = (d.linkedExpenseIds || [])
-    .map(eid => data.expenses.find(e => e.id === eid))
-    .filter(Boolean);
-
-  const expenseInfo = linkedExpenses.length
-    ? linkedExpenses.map(e => `${esc(e.label)} - ${money(e.amount)} - ${fdate(e.date)}`).join("<br>")
-    : "Aucune dépense liée";
-
-  const link = d.url && d.url.startsWith("http")
-    ? `<a class="docLink" href="${esc(d.url)}" target="_blank" rel="noopener">Ouvrir le document</a>`
-    : esc(d.url || "Aucun lien Drive renseigné");
-
-  return `
-    <h4>📄 ${esc(d.name)}</h4>
-    <span class="badge">${esc(d.type)}</span>
-    <span class="badge gray">${esc(d.driveStatus || "Non synchronisé")}</span>
-    <span class="badge cyan">${esc(d.folder || "Archives")}</span>
-    <p class="muted">
-      Dossier cible : ${esc(d.folder || "Archives")}<br>
-      Lien ou emplacement : ${link}<br>
-      Dépense(s) liée(s) :<br>${expenseInfo}<br>
-      ${d.comment ? "Commentaire : " + esc(d.comment) : ""}
-    </p>
-  `;
-}
-
-function renderDocuments() {
-  documentsList.innerHTML = data.documents.length
-    ? data.documents.slice().sort((a,b) => (a.folder || "").localeCompare(b.folder || "") || a.name.localeCompare(b.name)).map(d => `
-      <div class="item">
-        ${documentDisplay(d)}
-        <div class="actions"><button onclick="del('documents','${d.id}')">Supprimer</button></div>
-      </div>
-    `).join("")
-    : `<p class="muted">Aucun document référencé.</p>`;
-}
-
-function buildFolderMap() {
-  const map = {};
-
-  data.drive.folders.forEach(f => map[f] = []);
-  data.documents.forEach(d => {
-    const folder = d.folder || "Archives";
-    if (!map[folder]) map[folder] = [];
-    map[folder].push(d);
-  });
-
-  return map;
-}
-
-function renderDriveTree() {
-  const folderMap = buildFolderMap();
-
-  const tree = {
-    "9 Passage Bellevue": {}
-  };
-
-  Object.keys(folderMap).forEach(path => {
-    const parts = path.split("/");
-    let cursor = tree["9 Passage Bellevue"];
-
-    parts.forEach(p => {
-      if (!cursor[p]) cursor[p] = {};
-      cursor = cursor[p];
-    });
-
-    cursor.__docs = folderMap[path];
-  });
-
-  function drawNode(node, prefix) {
-    let output = "";
-    const keys = Object.keys(node).filter(k => k !== "__docs").sort();
-
-    keys.forEach((k, index) => {
-      const isLast = index === keys.length - 1 && !(node.__docs && node.__docs.length);
-      output += prefix + (isLast ? "└── " : "├── ") + "📁 " + k + "\n";
-      output += drawNode(node[k], prefix + (isLast ? "    " : "│   "));
-    });
-
-    if (node.__docs && node.__docs.length) {
-      node.__docs.forEach((d, i) => {
-        const isLastDoc = i === node.__docs.length - 1;
-        output += prefix + (isLastDoc ? "└── " : "├── ") + "📄 " + d.name + "\n";
-      });
-    }
-
-    return output;
-  }
-
-  driveTree.textContent = "📁 9 Passage Bellevue\n" + drawNode(tree["9 Passage Bellevue"], "");
-}
-
-function renderFolderView() {
-  const folderMap = buildFolderMap();
-  const folders = Object.keys(folderMap).sort();
-
-  folderView.innerHTML = folders.map(folder => {
-    const docs = folderMap[folder];
-
-    return `
-      <div class="folderCard">
-        <div class="folderHeader">
-          <span>📁 ${esc(folder)}</span>
-          <span class="badge ${docs.length ? "green" : "gray"}">${docs.length} document(s)</span>
-        </div>
-        ${
-          docs.length
-            ? docs.map(d => `
-              <div class="item">
-                ${documentDisplay(d)}
-              </div>
-            `).join("")
-            : `<p class="muted">Aucun document référencé dans ce dossier.</p>`
-        }
-      </div>
-    `;
-  }).join("");
-}
-
-function renderSettings() {
-  title.textContent = data.settings.name;
-  setName.value = data.settings.name;
-  setBank.value = data.settings.bank;
-  setBalance.value = data.settings.bankBalance;
-}
-
-function render() {
-  renderSettings();
-  renderSelects();
-  renderHome();
-  renderFinance();
-  renderExpenses();
-  renderOwners();
-  renderSuppliers();
-  renderCalls();
-  renderTasks();
-  renderDecisions();
-  renderDocuments();
-  renderDriveTree();
-  renderFolderView();
-}
-
-nav.addEventListener("click", e => {
-  if (e.target.tagName !== "BUTTON") return;
-
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-
-  e.target.classList.add("active");
-  document.getElementById(e.target.dataset.tab).classList.add("active");
 });
 
-eRecurring.addEventListener("change", () => {
-  recBlock.style.display = eRecurring.checked ? "block" : "none";
-});
-
-rMode.addEventListener("change", () => {
-  rCountBlock.style.display = rMode.value === "count" ? "block" : "none";
-  rEndBlock.style.display = rMode.value === "end" ? "block" : "none";
-});
-
-ePaidBy.addEventListener("change", () => {
-  ownerAdvanceBlock.style.display = ePaidBy.value === "owner" ? "block" : "none";
-});
-
-render();
 </script>
+
 </body>
 </html>
