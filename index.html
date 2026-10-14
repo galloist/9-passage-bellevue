@@ -1,447 +1,97 @@
- <!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1463ff">
+<meta name="theme-color" content="#155eef">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="9 Bellevue">
-<title>9 Passage Bellevue - V4.2 Pilotage financier</title>
+<meta name="apple-mobile-web-app-title" content="9 Bellevue V6">
+<title>9 Passage Bellevue - V6 Clôture & Pilotage</title>
 <style>
-:root{--bg:#f4f7fb;--card:#fff;--text:#102033;--muted:#687386;--line:#e4e9f2;--primary:#1463ff;--primary2:#0c43b8;--ok:#168044;--warn:#b76b00;--ko:#c62828;--shadow:0 12px 28px rgba(16,24,40,.08);--r:18px;--safe:env(safe-area-inset-bottom)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:calc(78px + var(--safe));-webkit-font-smoothing:antialiased}
-button,input,select,textarea{font:inherit}
-button{border:0;border-radius:14px;padding:11px 13px;background:var(--primary);color:white;font-weight:800}
-button.secondary{background:#edf4ff;color:var(--primary2)}
-button.danger{background:var(--ko)}
-button.small{font-size:12px;padding:7px 9px}
-.top{position:sticky;top:0;z-index:10;background:rgba(244,247,251,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 14px}
-.brand{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.brand-left{display:flex;gap:11px;align-items:center}
-.logo{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;color:#fff;font-size:22px;font-weight:900;background:linear-gradient(135deg,#1463ff,#18c29c)}
-h1{font-size:17px;line-height:1.1;margin:0}
-.sub{font-size:12px;color:var(--muted);margin-top:2px}
-.chips{display:flex;gap:7px;overflow:auto;margin-top:10px;padding-bottom:2px}
-.chip{white-space:nowrap;border-radius:999px;background:#eaf2ff;color:var(--primary2);font-size:12px;font-weight:800;padding:6px 9px}
-.main{padding:14px;max-width:980px;margin:auto}
-.section{display:none}.section.active{display:block}
-.grid{display:grid;gap:12px}
-.grid.g2,.grid.g3,.grid.g4{grid-template-columns:1fr}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:14px}
-.card h2{font-size:17px;margin:0 0 12px}
-.metric{font-size:25px;font-weight:950;letter-spacing:-.03em}
-.muted{color:var(--muted)}.tiny{font-size:12px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.list{display:flex;flex-direction:column;gap:10px}
-.item{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
-.item-title{font-weight:900}
-.pill{display:inline-flex;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900}
-.ok{background:#e8f7ee;color:var(--ok)}
-.warn{background:#fff4df;color:var(--warn)}
-.ko{background:#ffeded;color:var(--ko)}
-.blue{background:#eaf2ff;color:var(--primary2)}
-input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px;background:#fff;color:var(--text)}
-textarea{min-height:82px;resize:vertical}
-.form{display:grid;gap:10px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.bar{height:9px;border-radius:999px;background:#e8edf5;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,#1463ff,#18c29c)}
-.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.95);border-top:1px solid var(--line);backdrop-filter:blur(15px);padding:7px 8px calc(7px + var(--safe));display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
-.nav{background:transparent;color:#687386;border-radius:15px;padding:8px 4px;font-size:10px;font-weight:900;display:flex;flex-direction:column;align-items:center;gap:2px}
-.nav b{font-size:19px;line-height:18px}
-.nav.active{background:#eef4ff;color:var(--primary2)}
-.drawer{position:fixed;left:10px;right:10px;bottom:calc(76px + var(--safe));z-index:30;background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:12px;display:none;grid-template-columns:repeat(2,1fr);gap:8px}
-.drawer.open{display:grid}
-.doc{white-space:pre-wrap;border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff;line-height:1.4}
-.hide{display:none}
-.toast{position:fixed;left:14px;right:14px;bottom:calc(92px + var(--safe));z-index:40;background:#101828;color:#fff;border-radius:16px;padding:12px;box-shadow:var(--shadow);display:none}
-.notice{background:#f8fbff;border:1px dashed #b7c8ea;color:#34445a;border-radius:16px;padding:12px;font-size:13px}
-.kpi{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
-.ico{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:#edf4ff;font-size:20px}
-.lot-mini{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}
-.lot-metas{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.tag{background:#f2f5fa;color:#475467;border-radius:999px;font-size:11px;font-weight:800;padding:4px 7px}
-.owner-block{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
-.owner-header{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.owner-lots{margin-top:8px;display:grid;gap:6px}
-.owner-lot{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
-.donut-row{display:grid;grid-template-columns:138px 1fr;gap:12px;align-items:center}
-.donut{width:138px;height:138px;border-radius:50%;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
-.donut:after{content:"";position:absolute;inset:28px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
-.donut-center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:2;font-size:11px;font-weight:900;color:var(--text);pointer-events:none}
-.legend{display:grid;gap:7px}
-.legend-item{display:grid;grid-template-columns:12px 1fr auto;gap:7px;align-items:center;font-size:12px}
-.dot{width:12px;height:12px;border-radius:50%}
-.hbar-list{display:grid;gap:10px}
-.hbar-item{display:grid;gap:5px}
-.hbar-head{display:flex;justify-content:space-between;gap:8px;font-size:12px}
-.hbar{height:11px;border-radius:999px;background:#edf2f7;overflow:hidden}
-.hbar i{display:block;height:100%;border-radius:999px}
-.finance-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.mini-kpi{border:1px solid var(--line);border-radius:16px;padding:11px;background:#fff}
-.mini-kpi b{font-size:18px}
-.empty-chart{border:1px dashed #b7c8ea;border-radius:16px;padding:12px;color:#34445a;background:#f8fbff;font-size:13px}
-.balance-grid,.supplier-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
-.balance-mini{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:8px}
-.balance-mini span{display:block;font-size:11px;color:var(--muted)}
-.balance-mini b{font-size:13px}
-.supplier-card{display:grid;gap:8px}
-.upcoming-date{font-size:12px;color:var(--muted)}
-@media(max-width:390px){.donut-row{grid-template-columns:1fr}.donut{margin:auto}.finance-kpis,.supplier-meta,.balance-grid{grid-template-columns:1fr}}
-@media(min-width:760px){
-body{padding-bottom:0}.main{padding:22px;margin-left:220px}.grid.g2{grid-template-columns:repeat(2,1fr)}.grid.g3{grid-template-columns:repeat(3,1fr)}.grid.g4{grid-template-columns:repeat(4,1fr)}
-.form{grid-template-columns:repeat(12,1fr)}.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s8{grid-column:span 8}.s12{grid-column:span 12}
-.bottom{top:86px;bottom:auto;left:18px;right:auto;width:190px;border:1px solid var(--line);border-radius:24px;grid-template-columns:1fr}.nav{font-size:13px;flex-direction:row;justify-content:flex-start;padding:11px 12px}.drawer{left:214px;right:auto;bottom:auto;top:430px;width:420px}
-}
+:root{--bg:#f3f6fb;--card:#fff;--text:#122033;--muted:#667085;--line:#e3e8f0;--blue:#155eef;--blue2:#0b43b6;--cyan:#0ea5a5;--green:#168044;--orange:#b65f00;--red:#c62828;--purple:#6941c6;--shadow:0 10px 28px rgba(16,24,40,.07);--r:18px;--safe:env(safe-area-inset-bottom)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:calc(82px + var(--safe));-webkit-font-smoothing:antialiased}button,input,select,textarea{font:inherit}button{border:0;border-radius:13px;padding:10px 13px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer}button.secondary{background:#eaf1ff;color:var(--blue2)}button.ghost{background:#f4f6f8;color:#344054}button.danger{background:var(--red)}button.small{font-size:12px;padding:7px 9px}.top{position:sticky;top:0;z-index:20;padding:11px 14px;background:rgba(243,246,251,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.brand{display:flex;justify-content:space-between;gap:10px;align-items:center}.brand-left{display:flex;gap:10px;align-items:center}.logo{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:21px;font-weight:950;color:white;background:linear-gradient(135deg,var(--blue),var(--cyan))}h1{font-size:17px;line-height:1.1;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:2px}.chips{display:flex;gap:7px;overflow:auto;margin-top:9px}.chip{white-space:nowrap;border-radius:999px;background:#eaf1ff;color:var(--blue2);font-size:11px;font-weight:850;padding:6px 9px}.main{max-width:1180px;margin:auto;padding:14px}.section{display:none}.section.active{display:block}.grid{display:grid;gap:12px}.g2,.g3,.g4{grid-template-columns:1fr}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:14px}.card h2{font-size:17px;margin:0 0 12px}.card h3{font-size:14px;margin:0 0 9px}.metric{font-size:25px;font-weight:950;letter-spacing:-.03em}.muted{color:var(--muted)}.tiny{font-size:12px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.stack{display:grid;gap:10px}.item{border:1px solid var(--line);border-radius:15px;padding:11px;background:#fff}.item-title{font-weight:900}.pill{display:inline-flex;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900}.ok{background:#e8f7ee;color:var(--green)}.warn{background:#fff2db;color:var(--orange)}.ko{background:#ffeded;color:var(--red)}.blue{background:#eaf1ff;color:var(--blue2)}.purple{background:#f0eaff;color:var(--purple)}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:10px;background:#fff;color:var(--text)}textarea{min-height:80px;resize:vertical}.form{display:grid;gap:9px}.actions{display:flex;gap:7px;flex-wrap:wrap}.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);border-top:1px solid var(--line);backdrop-filter:blur(15px);padding:7px 7px calc(7px + var(--safe));display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.nav{background:transparent;color:#667085;border-radius:14px;padding:8px 3px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:2px}.nav b{font-size:18px;line-height:18px}.nav.active{background:#edf3ff;color:var(--blue2)}.drawer{position:fixed;left:10px;right:10px;bottom:calc(78px + var(--safe));z-index:35;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:11px;display:none;grid-template-columns:repeat(2,1fr);gap:7px}.drawer.open{display:grid}.toast{position:fixed;left:14px;right:14px;bottom:calc(96px + var(--safe));z-index:50;background:#101828;color:white;border-radius:14px;padding:11px;display:none}.kpi{display:grid;grid-template-columns:42px 1fr;gap:9px;align-items:center}.ico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:#edf3ff;font-size:19px}.bar{height:9px;border-radius:999px;background:#e8edf5;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan))}.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.mini{border:1px solid var(--line);border-radius:13px;padding:9px;background:#fafcff}.mini span{display:block;font-size:11px;color:var(--muted)}.mini b{font-size:15px}.notice{background:#f7faff;border:1px dashed #adc2e7;border-radius:14px;padding:11px;color:#344054;font-size:13px}.alert{background:#fff5e8;border:1px solid #f5c87a;border-radius:14px;padding:11px;color:#7a3e00;font-size:13px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:650px;background:#fff}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:12px;vertical-align:top}th{background:#f3f6fb;color:#344054;position:sticky;top:0}td.num,th.num{text-align:right}.progress-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.check{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:start}.check input{width:18px;height:18px;margin-top:2px}.doc{white-space:pre-wrap;border:1px solid var(--line);border-radius:14px;padding:12px;line-height:1.42}.hide{display:none}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:12px}.tab{white-space:nowrap;background:#edf1f7;color:#475467}.tab.active{background:var(--blue);color:#fff}.owner-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.status-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px}.g{background:var(--green)}.o{background:var(--orange)}.r{background:var(--red)}
+@media(max-width:390px){.mini-grid{grid-template-columns:1fr}.metric{font-size:22px}}
+@media(min-width:760px){body{padding-bottom:0}.main{padding:22px;margin-left:218px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.form{grid-template-columns:repeat(12,1fr)}.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s8{grid-column:span 8}.s12{grid-column:span 12}.bottom{top:84px;bottom:auto;left:16px;right:auto;width:188px;border:1px solid var(--line);border-radius:22px;grid-template-columns:1fr}.nav{font-size:13px;flex-direction:row;justify-content:flex-start;padding:11px}.drawer{left:208px;right:auto;bottom:auto;top:430px;width:430px}}
 </style>
 </head>
 <body>
-<header class="top">
-<div class="brand">
-<div class="brand-left"><div class="logo">9</div><div><h1>9 Passage Bellevue</h1><div class="sub">V4.2 pilotage financier iPhone</div></div></div>
-<button class="secondary small" onclick="exportJSON()">Sauver</button>
-</div>
-<div class="chips">
-<span class="chip">Mode solo</span>
-<span class="chip">Soldes copropriétaires</span>
-<span class="chip">Dépenses à venir</span>
-<label class="chip">Restaurer<input class="hide" type="file" accept="application/json" onchange="importJSON(event)"></label>
-</div>
-</header>
-
+<header class="top"><div class="brand"><div class="brand-left"><div class="logo">9</div><div><h1>9 Passage Bellevue</h1><div class="sub">V6 Clôture & Pilotage</div></div></div><button class="secondary small" onclick="exportJSON()">Sauver</button></div><div class="chips"><span class="chip">Exercice 2026</span><span class="chip">Clôture guidée</span><span class="chip">2 clés de répartition</span><label class="chip">Restaurer<input class="hide" type="file" accept="application/json" onchange="importJSON(event)"></label></div></header>
 <main class="main">
-<section id="home" class="section active"></section>
-<section id="finance" class="section"></section>
-<section id="calls" class="section"></section>
-<section id="ag" class="section"></section>
-<section id="more" class="section"></section>
-<section id="lots" class="section"></section>
-<section id="works" class="section"></section>
-<section id="suppliers" class="section"></section>
-<section id="incidents" class="section"></section>
-<section id="docs" class="section"></section>
-<section id="settings" class="section"></section>
+<section id="home" class="section active"></section><section id="finance" class="section"></section><section id="owners" class="section"></section><section id="calls" class="section"></section><section id="closing" class="section"></section><section id="works" class="section"></section><section id="invoices" class="section"></section><section id="meetings" class="section"></section><section id="docs" class="section"></section><section id="settings" class="section"></section>
 </main>
-
-<nav class="bottom" id="nav"></nav>
-<div class="drawer" id="drawer"></div>
-<div class="toast" id="toast"></div>
-
+<nav class="bottom" id="nav"></nav><div class="drawer" id="drawer"></div><div class="toast" id="toast"></div>
 <script>
-const EUR=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'});
-const KEY='bellevue-v42-financier',LEGACY_KEY='bellevue-v412-iphone',OLD_KEY='bellevue-v411-iphone',V41='bellevue-v41-iphone';
-const uid=()=>Math.random().toString(36).slice(2,10);
-const today=()=>new Date().toISOString().slice(0,10);
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-const colors=['#1463ff','#18c29c','#ffb020','#ef476f','#7c3aed','#64748b','#06b6d4','#f97316','#84cc16','#ec4899'];
-
-const seed={
-settings:{name:'9 Passage Bellevue',address:'9 Passage Bellevue, 74000 Annecy',bank:'Banque de Savoie',year:'2027',bankAmount:4811.10,savingsAmount:1372.02,worksFund:1188.31,worksProvision:1500},
-owners:[
-{id:'O1',name:'GALLOIS ou GUIFFIER Teddy ou Fanny',tantiemes:356},
-{id:'O2',name:'SCI LCT IMMO',tantiemes:295},
-{id:'O3',name:'PAREL Emmanuelle',tantiemes:349}
-],
-lots:[
-{id:'L6',n:'6',type:'Appartement',owner:'O1',t:288},
-{id:'L10',n:'10',type:'Garage',owner:'O1',t:47},
-{id:'L12',n:'12',type:'Garage',owner:'O1',t:21},
-{id:'L7',n:'7',type:'Appartement',owner:'O2',t:279},
-{id:'L8',n:'8',type:'Cave',owner:'O2',t:12},
-{id:'L13',n:'13',type:'Parking',owner:'O2',t:4},
-{id:'L1',n:'1',type:'Garage',owner:'O3',t:27},
-{id:'L2',n:'2',type:'Cave',owner:'O3',t:13},
-{id:'L3',n:'3',type:'Appartement',owner:'O3',t:288},
-{id:'L11',n:'11',type:'Garage',owner:'O3',t:21}
-],
-budget:[
-{id:uid(),cat:'Charges générales',label:'Électricité',amount:180},
-{id:uid(),cat:'Charges générales',label:'Entretien et petites réparations',amount:1500},
-{id:uid(),cat:'Charges spéciales BAT A',label:'Eau',amount:450},
-{id:uid(),cat:'Charges spéciales BAT A',label:'Électricité',amount:7000},
-{id:uid(),cat:'Assurance',label:'AXA Multirisque immeuble',amount:1400.40}
-],
-entries:[
-{id:uid(),date:'2026-12-31',type:'recette',cat:'Solde initial',label:'Solde Banque de Savoie repris',amount:4811.10,status:'Validé'},
-{id:uid(),date:'2026-12-31',type:'recette',cat:'Solde initial',label:'Solde Livret A repris',amount:1372.02,status:'Validé'},
-{id:uid(),date:'2026-12-31',type:'recette',cat:'Fonds travaux',label:'Fonds travaux repris',amount:1188.31,status:'Validé'},
-{id:uid(),date:'2026-12-31',type:'recette',cat:'Travaux décidés',label:'Provision PPPT / DPEC / rénovation énergétique',amount:1500,status:'Validé'}
-],
-calls:[],
-meetings:[{id:uid(),title:'Première AG en syndic bénévole',date:'2027-01-15',status:'À préparer',agenda:['Organisation du syndic bénévole','Validation du budget','Modalités des appels de fonds'],resolutions:[]}],
-works:[{id:uid(),title:'PPPT / DPEC / rénovation énergétique',status:'À cadrer',budget:1500,due:'',desc:'Provision travaux décidés reprise du syndic professionnel.'}],
-suppliers:[
-{id:uid(),name:'AXA',type:'Assurance',contract:'Multirisque Immeuble 828921705',amount:1400.40,frequency:'Annuelle',nextDue:'2027-02-08',renewal:'2027-02-08'},
-{id:uid(),name:'Banque de Savoie',type:'Banque',contract:'Compte copropriété',amount:0,frequency:'Mensuelle',nextDue:'',renewal:''},
-{id:uid(),name:'EDF Entreprises',type:'Énergie',contract:'Électricité parties communes',amount:0,frequency:'Mensuelle',nextDue:'',renewal:''},
-{id:uid(),name:'T-PSE Bonneville',type:'Chauffage / maintenance',contract:'Chauffage et maintenance P2',amount:0,frequency:'Mensuelle',nextDue:'',renewal:''}
-],
-incidents:[],
-docs:[]
-};
-
-let S=migrate(load());
-
-function load(){
-try{return JSON.parse(localStorage.getItem(KEY))||JSON.parse(localStorage.getItem(LEGACY_KEY))||JSON.parse(localStorage.getItem(OLD_KEY))||JSON.parse(localStorage.getItem(V41))||structuredClone(seed)}
-catch(e){return structuredClone(seed)}
-}
-function migrate(x){
-x.suppliers=(x.suppliers||[]).map(s=>({...s,frequency:s.frequency||'Annuelle',nextDue:s.nextDue||s.renewal||''}));
-return x;
-}
-function save(){localStorage.setItem(KEY,JSON.stringify(S));render()}
+'use strict';
+const EUR=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}), KEY='bellevue-v6-cloture', V42='bellevue-v42-financier';
+const uid=()=>Math.random().toString(36).slice(2,10), today=()=>new Date().toISOString().slice(0,10), $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const seed={meta:{version:'6.0',created:'2026-10-14',updated:'2026-10-14'},settings:{name:'9 Passage Bellevue',address:'9 Passage Bellevue, 74000 Annecy',exercise:2026,bankOpening:2097.89,bankAtDate:1476.32,bankDate:'2026-09-30',savingsOpening:320.46,savingsAtDate:1372.02,savingsDate:'2026-01-30',worksFundOpening:637,worksFundCalls:551.31,worksFundSpent:0,budget2026:14700,currentCalls2026:11024.97,budget2027:9500},owners:[
+{id:'O1',name:'GALLOIS / GUIFFIER',account:'45000004',cg:356,bata:335,lots:'6, 10, 12'},
+{id:'O2',name:'SCI LCT IMMO',account:'45000005',cg:295,bata:291,lots:'7, 8, 13'},
+{id:'O3',name:'PAREL Emmanuelle',account:'45000003',cg:349,bata:328,lots:'1, 2, 3, 11'}],
+budget2026:[['Assurance',1400,'CG'],['Chauffage',7300,'BATA'],['Eau',550,'CG'],['Électricité',450,'CG'],['Entretien courant',500,'CG'],['Frais bancaires',50,'CG'],['Honoraires syndic',4200,'CG'],['Autres charges',250,'CG']].map((x,i)=>({id:'B26'+i,label:x[0],planned:x[1],key:x[2]})),
+budget2027:[['Assurance',1500,'CG'],['Chauffage',6380,'BATA'],['Eau',550,'CG'],['Électricité',450,'CG'],['Entretien courant',500,'CG'],['Frais bancaires',120,'CG'],['Honoraires syndic',0,'CG']].map((x,i)=>({id:'B27'+i,label:x[0],planned:x[1],key:x[2]})),
+expenses:[
+{id:'E1',date:'2026-02-09',supplier:'Fournisseur fioul',invoice:'Fioul 09/02/2026',label:'Livraison de 3 000 litres',cat:'Chauffage',key:'BATA',amount:3717.18,status:'Justifié',scope:'current'},
+{id:'E2',date:'2026-01-01',supplier:'Assureur',invoice:'Prime 2026',label:'Assurance annuelle',cat:'Assurance',key:'CG',amount:1400.40,status:'Justifié',scope:'current'},
+{id:'E3',date:'2026-09-30',supplier:'EDF',invoice:'Factures janvier à septembre',label:'Électricité documentée à date',cat:'Électricité',key:'CG',amount:157.46,status:'Partiel',scope:'current'},
+{id:'E4',date:'2026-09-30',supplier:'Service des eaux',invoice:'Prélèvements avril et septembre',label:'Eau 2026 à date',cat:'Eau',key:'CG',amount:327.73,status:'Factures manquantes',scope:'current'},
+{id:'E5',date:'2026-09-30',supplier:'TotalEnergies Proxi Sud Est',invoice:'Mensualités janvier à septembre',label:'Maintenance chaudière',cat:'Entretien courant',key:'CG',amount:197.98,status:'Partiel',scope:'current'},
+{id:'E6',date:'2026-07-10',supplier:'IRIA Immobilier',invoice:'Honoraires 01/01 au 10/07',label:'Honoraires syndic professionnel',cat:'Honoraires syndic',key:'CG',amount:2107.51,status:'Justifié',scope:'current'},
+{id:'E7',date:'2026-09-30',supplier:'Banque',invoice:'Frais identifiés',label:'Frais bancaires 2026 à date',cat:'Frais bancaires',key:'CG',amount:26.82,status:'Partiel',scope:'current'}],
+exceptional:[
+{id:'X1',title:'DPE collectif / PPPT',decision:'Appel exceptionnel juillet 2026',called:1500,received:1500,spent:1500,supplier:'ABC Expertise',docs:'FA-26-04-2378 + FA-26-04-2379',status:'Rapproché'},
+{id:'X2',title:'Acompte audit énergétique',decision:'AGE 25/08/2026 - résolution 9',called:450,received:289.80,spent:450,supplier:'ABC Expertise',docs:'Convention + acompte',status:'Partiel'},
+{id:'X3',title:'Acompte AMO',decision:'AGE 25/08/2026 - résolution 9',called:900,received:579.60,spent:900,supplier:'ABC Expertise',docs:'FA-26-09-2693',status:'Partiel'},
+{id:'X4',title:'Maîtrise d’œuvre - premier appel',decision:'AGE 25/08/2026 - résolution 9',called:2904,received:1870.18,spent:1953.27,supplier:'Trait d’Audace',docs:'26-09-153',status:'Partiel'},
+{id:'X5',title:'Solde audit énergétique',decision:'Financement à préciser',called:0,received:0,spent:1050,supplier:'ABC Expertise',docs:'FA-26-09-2746',status:'À affecter'}],
+ownerMovements:[
+{id:'M1',ownerId:'O1',date:'2026-07-09',kind:'call-exceptional',label:'DPE collectif / PPPT',amount:534,status:'Réglé'},
+{id:'M2',ownerId:'O2',date:'2026-07-09',kind:'call-exceptional',label:'DPE collectif / PPPT',amount:442.50,status:'Réglé'},
+{id:'M3',ownerId:'O3',date:'2026-07-09',kind:'call-exceptional',label:'DPE collectif / PPPT',amount:523.50,status:'Réglé'},
+{id:'M4',ownerId:'O1',date:'2026-09-06',kind:'call-exceptional',label:'Études énergétiques AF-2026-01',amount:1514.42,status:'Non réglé'},
+{id:'M5',ownerId:'O2',date:'2026-09-06',kind:'call-exceptional',label:'Études énergétiques AF-2026-01',amount:1254.93,status:'Réglé'},
+{id:'M6',ownerId:'O3',date:'2026-09-06',kind:'call-exceptional',label:'Études énergétiques AF-2026-01',amount:1484.65,status:'Réglé'},
+{id:'M7',ownerId:'O3',date:'2026-09-01',kind:'payment-current',label:'Règlement d’un appel courant antérieur',amount:1334.47,status:'Affecté'}],
+checklist:[
+['Relevés bancaires janvier à septembre','Terminé','Banque'],['Relevés bancaires octobre à décembre','À faire','Banque'],['Livret A au 31/12/2025 et janvier 2026','Terminé','Fonds travaux'],['Historique Livret A février à décembre et intérêts','À faire','Fonds travaux'],['Grand livre et relevé général IRIA','Terminé','IRIA'],['Balances générale, copropriétaires et fournisseurs IRIA','À faire','IRIA'],['Factures DPE / PPPT','Terminé','Travaux'],['Factures audit, AMO et MOE','Terminé','Travaux'],['Appels exceptionnels de septembre','Terminé','Travaux'],['Encaissement GALLOIS / GUIFFIER de 1 514,42 €','À faire','Copropriétaires'],['Affectation du règlement PAREL de 1 334,47 €','Terminé','Copropriétaires'],['Factures d’eau','À faire','Charges'],['Factures maintenance chaudière','En cours','Charges'],['Factures EDF octobre à décembre','À faire','Charges'],['Vérifier une éventuelle nouvelle livraison de fioul','À faire','Charges'],['Saisir les charges à rattacher à 2026','À faire','Clôture'],['Finaliser les rapprochements bancaires','À faire','Clôture'],['Calculer les régularisations individuelles','À faire','Clôture'],['Préparer les annexes comptables d’AG','À faire','AG']].map((x,i)=>({id:'C'+i,title:x[0],status:x[1],area:x[2]})),
+calls2027:[{id:'A1',due:'2027-01-01',label:'T1 2027',cg:780,bata:1595},{id:'A2',due:'2027-04-01',label:'T2 2027',cg:780,bata:1595},{id:'A3',due:'2027-07-01',label:'T3 2027',cg:780,bata:1595},{id:'A4',due:'2027-10-01',label:'T4 2027',cg:780,bata:1595}],meetings:[{id:'AG1',title:'AG extraordinaire - ajustement budgétaire',date:'2026-10-12',status:'Approuvée',agenda:['Absence d’appel T4 2026','Fonds travaux 2026','Budget 2027 révisé à 9 500 €']}],docs:[]};
+let S=load();
+function load(){try{const v6=localStorage.getItem(KEY);if(v6)return migrate(JSON.parse(v6));return structuredClone(seed)}catch(e){return structuredClone(seed)}}
+function migrate(x){return {...structuredClone(seed),...x,settings:{...seed.settings,...(x.settings||{})},meta:{...seed.meta,...(x.meta||{})}}}
+function save(msg='Enregistré'){S.meta.updated=today();localStorage.setItem(KEY,JSON.stringify(S));render();toast(msg)}
 function toast(t){$('toast').textContent=t;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',1800)}
-function totalT(){return S.owners.reduce((a,o)=>a+Number(o.tantiemes),0)}
-function owner(id){return (S.owners.find(o=>o.id===id)||{}).name||'Copropriété'}
-function ownerT(id){return Number((S.owners.find(o=>o.id===id)||{}).tantiemes||0)}
-function share(id,a){return Math.round(Number(a||0)*ownerT(id)/totalT()*100)/100}
-function cash(){return S.entries.reduce((a,e)=>a+(e.type==='depense'?-Number(e.amount||0):Number(e.amount||0)),0)}
-function spent(){return S.entries.filter(e=>e.type==='depense').reduce((a,e)=>a+Number(e.amount||0),0)}
-function income(){return S.entries.filter(e=>e.type==='recette').reduce((a,e)=>a+Number(e.amount||0),0)}
-function budget(){return S.budget.reduce((a,b)=>a+Number(b.amount||0),0)}
-function pill(s){
-let c=['Validé','Payé','Clos','Envoyé','À jour'].includes(s)?'ok':['À préparer','À cadrer','À relancer','Préparé','À venir'].includes(s)?'warn':['Impayé','En retard'].includes(s)?'ko':'blue';
-return `<span class="pill ${c}">${esc(s)}</span>`;
-}
-function lotsByOwner(id){return S.lots.filter(l=>l.owner===id)}
-function lotTypeCount(){let map={};S.lots.forEach(l=>map[l.type]=(map[l.type]||0)+1);return map}
-function expenseByCat(){let m={};S.entries.filter(e=>e.type==='depense').forEach(e=>{let k=e.cat||'Autres';m[k]=(m[k]||0)+Number(e.amount||0)});return Object.entries(m).sort((a,b)=>b[1]-a[1])}
-function budgetByCat(){let m={};S.budget.forEach(b=>{let k=b.cat||'Budget';m[k]=(m[k]||0)+Number(b.amount||0)});return Object.entries(m).sort((a,b)=>b[1]-a[1])}
-function monthlyAmount(s){
-let a=Number(s.amount||s.annualAmount||0);
-let f=s.frequency||'Annuelle';
-if(f==='Mensuelle')return a;
-if(f==='Trimestrielle')return a/3;
-if(f==='Semestrielle')return a/6;
-return a/12;
-}
-function supplierAmount(s){return Number(s.amount||s.annualAmount||0)}
-function upcomingExpenses(){
-let fromSup=(S.suppliers||[]).filter(s=>s.nextDue).map(s=>({date:s.nextDue,title:s.name,detail:s.contract||s.type,amount:monthlyAmount(s),kind:'Fournisseur'}));
-let fromWorks=(S.works||[]).filter(w=>w.status!=='Terminé'&&Number(w.budget||0)>0).map(w=>({date:w.due||'',title:w.title,detail:'Travaux prévus',amount:Number(w.budget||0),kind:'Travaux'}));
-return [...fromSup,...fromWorks].sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999'));
-}
-function ownerBalances(){
-return S.owners.map(o=>{
-let calls=S.entries.filter(e=>e.ownerId===o.id&&e.cat==='Appel de fonds').reduce((a,e)=>a+Number(e.amount||0),0);
-let payments=S.entries.filter(e=>e.ownerId===o.id&&e.cat!=='Appel de fonds'&&e.type==='recette').reduce((a,e)=>a+Number(e.amount||0),0);
-let due=Math.max(0,calls-payments);
-return {...o,calls,payments,due,status:due>0?'À relancer':'À jour'};
-});
-}
-function donutGradient(items,total){
-if(!items.length||!total)return '#edf2f7';
-let start=0,parts=[];
-items.forEach(([k,v],i)=>{let deg=v/total*360,end=start+deg;parts.push(`${colors[i%colors.length]} ${start.toFixed(1)}deg ${end.toFixed(1)}deg`);start=end});
-return `conic-gradient(${parts.join(',')})`;
-}
-function legend(items,total){
-return `<div class="legend">${items.map(([k,v],i)=>`<div class="legend-item"><span class="dot" style="background:${colors[i%colors.length]}"></span><span>${esc(k)}</span><b>${EUR.format(v)}</b></div>`).join('')||'<div class="empty-chart">Aucune dépense enregistrée pour l’instant.</div>'}</div>`;
-}
-function hbars(items,total){
-return `<div class="hbar-list">${items.map(([k,v],i)=>`<div class="hbar-item"><div class="hbar-head"><span>${esc(k)}</span><b>${EUR.format(v)}</b></div><div class="hbar"><i style="width:${total?Math.max(2,v/total*100):0}%;background:${colors[i%colors.length]}"></i></div></div>`).join('')||'<div class="empty-chart">Aucune donnée à afficher.</div>'}</div>`;
-}
-
-function buildNav(){
-let n=[['home','⌂','Accueil'],['finance','€','Finances'],['calls','↗','Appels'],['ag','✓','AG'],['more','☰','Plus']];
-$('nav').innerHTML=n.map(x=>`<button class="nav ${x[0]=='home'?'active':''}" onclick="go('${x[0]}',this)"><b>${x[1]}</b>${x[2]}</button>`).join('');
-$('drawer').innerHTML=[['lots','Lots'],['works','Travaux'],['suppliers','Fournisseurs'],['incidents','Sinistres'],['docs','Documents'],['settings','Paramètres']].map(x=>`<button class="secondary" onclick="go('${x[0]}');toggle(false)">${x[1]}</button>`).join('');
-}
-function go(id,b){
-if(id==='more'){toggle();return}
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-$(id).classList.add('active');
-document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
-if(b)b.classList.add('active');
-toggle(false);
-render();
-}
+function sum(a,fn=x=>x){return a.reduce((s,x)=>s+Number(fn(x)||0),0)}
+function owner(id){return S.owners.find(o=>o.id===id)||{name:'Inconnu',cg:0,bata:0}}
+function statusPill(s){let c=['Terminé','Justifié','Rapproché','Réglé','Approuvée','Affecté'].includes(s)?'ok':['En cours','Partiel','À affecter','Factures manquantes'].includes(s)?'warn':['Non réglé','À faire'].includes(s)?'ko':'blue';return `<span class="pill ${c}">${esc(s)}</span>`}
+function currentSpent(){return sum(S.expenses,e=>e.scope==='current'?e.amount:0)}
+function exceptionalSpent(){return sum(S.exceptional,x=>x.spent)}
+function worksFund(){return Number(S.settings.worksFundOpening)+Number(S.settings.worksFundCalls)-Number(S.settings.worksFundSpent)}
+function totalBank(){return Number(S.settings.bankAtDate)+Number(S.settings.savingsAtDate)}
+function outstanding(){return sum(S.ownerMovements,m=>(m.kind.includes('call')&&m.status!=='Réglé')?m.amount:0)}
+function buildNav(){const n=[['home','⌂','Accueil'],['finance','€','Finances'],['owners','♙','Copro.'],['closing','✓','Clôture'],['more','☰','Plus']];$('nav').innerHTML=n.map((x,i)=>`<button class="nav ${i===0?'active':''}" onclick="go('${x[0]}',this)"><b>${x[1]}</b>${x[2]}</button>`).join('');$('drawer').innerHTML=[['calls','Appels 2027'],['works','Travaux'],['invoices','Factures'],['meetings','AG'],['docs','Documents'],['settings','Paramètres']].map(x=>`<button class="secondary" onclick="go('${x[0]}');toggle(false)">${x[1]}</button>`).join('')}
+function go(id,b){if(id==='more'){toggle();return}document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');toggle(false);render()}
 function toggle(force){$('drawer').classList.toggle('open',force===undefined?!$('drawer').classList.contains('open'):force)}
-function render(){home();finance();calls();ag();lots();works();suppliers();incidents();docs();settings()}
-
-function home(){
-let pct=budget()?Math.min(100,spent()/budget()*100):0,types=lotTypeCount(),up=upcomingExpenses(),up30=up.reduce((a,e)=>a+Number(e.amount||0),0),projected=cash()-up30,balances=ownerBalances();
-$('home').innerHTML=`
-<div class="grid g4">
-<div class="card kpi"><div class="ico">💶</div><div><div class="metric">${EUR.format(cash())}</div><div class="muted tiny">Trésorerie locale</div></div></div>
-<div class="card kpi"><div class="ico">🏦</div><div><div class="metric">${EUR.format(S.settings.bankAmount)}</div><div class="muted tiny">Solde compte bancaire</div></div></div>
-<div class="card kpi"><div class="ico">📉</div><div><div class="metric">${EUR.format(up30)}</div><div class="muted tiny">Dépenses à venir</div></div></div>
-<div class="card kpi"><div class="ico">🔮</div><div><div class="metric">${EUR.format(projected)}</div><div class="muted tiny">Prévision après dépenses</div></div></div>
-</div>
-
-<div class="grid g2" style="margin-top:12px">
-<div class="card"><h2>Soldes copropriétaires</h2><div class="list">
-${balances.map(o=>`<div class="item">
-<div class="row"><div><b>${esc(o.name)}</b><div class="tiny muted">${o.tantiemes}/1000 tantièmes</div></div>${pill(o.status)}</div>
-<div class="balance-grid">
-<div class="balance-mini"><span>Appels</span><b>${EUR.format(o.calls)}</b></div>
-<div class="balance-mini"><span>Paiements</span><b>${EUR.format(o.payments)}</b></div>
-<div class="balance-mini"><span>Solde dû</span><b>${EUR.format(o.due)}</b></div>
-</div></div>`).join('')}
-</div></div>
-
-<div class="card"><h2>Dépenses à venir</h2><div class="list">
-${up.length?up.slice(0,6).map(e=>`<div class="item row"><div><b>${esc(e.title)}</b><div class="upcoming-date">${esc(e.date||'Date à préciser')} - ${esc(e.detail||e.kind)}</div></div><b>${EUR.format(e.amount)}</b></div>`).join(''):'<div class="empty-chart">Aucune dépense à venir renseignée.</div>'}
-</div></div>
-</div>
-
-<div class="grid g2" style="margin-top:12px">
-<div class="card"><h2>Budget consommé</h2><div class="row"><span>Dépenses saisies</span><b>${EUR.format(spent())}</b></div><div class="bar" style="margin:10px 0"><i style="width:${pct}%"></i></div><div class="tiny muted">${pct.toFixed(1)} % du budget actuellement saisi.</div></div>
-<div class="card"><h2>Informations sur les lots</h2><div class="grid g3"><div class="item"><div class="metric" style="font-size:21px">${S.lots.length}</div><div class="tiny muted">lots</div></div><div class="item"><div class="metric" style="font-size:21px">${totalT()}</div><div class="tiny muted">tantièmes</div></div><div class="item"><div class="metric" style="font-size:21px">${S.owners.length}</div><div class="tiny muted">copropriétaires</div></div></div><div class="lot-metas" style="margin-top:10px">${Object.entries(types).map(([k,v])=>`<span class="tag">${v} ${esc(k)}</span>`).join('')}</div></div>
-</div>`;
-}
-
-function finance(){
-let exp=expenseByCat(),expTotal=spent(),bud=budgetByCat(),budTotal=budget(),up=upcomingExpenses(),upTotal=up.reduce((a,e)=>a+Number(e.amount||0),0);
-$('finance').innerHTML=`
-<div class="card"><h2>Vue graphique des finances</h2><div class="finance-kpis">
-<div class="mini-kpi"><div class="tiny muted">Recettes</div><b>${EUR.format(income())}</b></div>
-<div class="mini-kpi"><div class="tiny muted">Dépenses</div><b>${EUR.format(expTotal)}</b></div>
-<div class="mini-kpi"><div class="tiny muted">Solde bancaire</div><b>${EUR.format(S.settings.bankAmount)}</b></div>
-<div class="mini-kpi"><div class="tiny muted">À venir</div><b>${EUR.format(upTotal)}</b></div>
-</div></div>
-
-<div class="grid g2" style="margin-top:12px">
-<div class="card"><h2>Dépenses par type</h2>${exp.length?`<div class="donut-row"><div class="donut" style="background:${donutGradient(exp,expTotal)}"><div class="donut-center">Dépenses<br>${EUR.format(expTotal)}</div></div>${legend(exp,expTotal)}</div>`:'<div class="empty-chart">Aucune dépense saisie. Ajoute une dépense pour voir le graphique se remplir.</div>'}</div>
-<div class="card"><h2>Budget prévisionnel par type</h2>${hbars(bud,budTotal)}</div>
-</div>
-
-<div class="card" style="margin-top:12px"><h2>Comptabilité simple</h2>
-<form class="form" onsubmit="addEntry(event)">
-<input class="s2" type="date" name="date" value="${today()}" required>
-<select class="s2" name="type"><option value="depense">Dépense</option><option value="recette">Recette</option></select>
-<input class="s4" name="label" placeholder="Libellé" required>
-<select class="s2" name="cat"><option>Assurance</option><option>Électricité</option><option>Eau</option><option>Chauffage</option><option>Entretien</option><option>Banque</option><option>Travaux</option><option>Appel de fonds</option><option>Paiement copropriétaire</option><option>Fonds travaux</option><option>Solde initial</option><option>Autres</option></select>
-<input class="s2" type="number" step="0.01" min="0" name="amount" placeholder="Montant" required>
-<select class="s3" name="ownerId"><option value="">Copropriété</option>${S.owners.map(o=>`<option value="${o.id}">${esc(o.name)}</option>`).join('')}</select>
-<button class="s12">Ajouter</button>
-</form></div>
-
-<div class="card" style="margin-top:12px"><h2>Journal</h2><div class="list">
-${S.entries.slice().reverse().map(e=>`<div class="item"><div class="row"><div><div class="item-title">${esc(e.label)}</div><div class="tiny muted">${e.date} - ${esc(e.cat)}${e.ownerId?' - '+esc(owner(e.ownerId)):''}</div></div>${pill(e.status)}</div><div class="row" style="margin-top:8px"><span>${e.type==='depense'?'Dépense':'Recette'}</span><b>${e.type==='depense'?'- ':'+ '}${EUR.format(e.amount)}</b></div><div class="actions" style="margin-top:8px"><button class="danger small" onclick="remove('entries','${e.id}')">Supprimer</button></div></div>`).join('')}
-</div></div>`;
-}
-function addEntry(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.entries.push({id:uid(),...f,amount:Number(f.amount),status:'Validé'});ev.target.reset();save();toast('Opération ajoutée')}
-function remove(k,id){S[k]=S[k].filter(x=>x.id!==id);save()}
-
-function calls(){
-$('calls').innerHTML=`<div class="card"><h2>Appels de fonds</h2><form class="form" onsubmit="addCall(event)">
-<input class="s3" name="period" placeholder="Période" required>
-<input class="s3" type="date" name="due" required>
-<input class="s3" type="number" step="0.01" name="amount" placeholder="Montant total" required>
-<button class="s3">Créer</button>
-</form></div>
-<div class="list" style="margin-top:12px">${S.calls.map(c=>`<div class="card"><div class="row"><h2>${esc(c.period)}</h2>${pill(c.status)}</div><div class="tiny muted">Échéance ${c.due}</div><div class="grid g3" style="margin-top:10px">${S.owners.map(o=>`<div class="item"><b>${esc(o.name)}</b><div class="metric" style="font-size:20px">${EUR.format(share(o.id,c.amount))}</div><div class="tiny muted">${o.tantiemes} tantièmes</div></div>`).join('')}</div><div class="actions" style="margin-top:10px"><button onclick="postCall('${c.id}')">Comptabiliser</button><button class="secondary" onclick="docCall('${c.id}')">Document</button><button class="danger" onclick="remove('calls','${c.id}')">Suppr.</button></div></div>`).join('')||'<div class="notice">Aucun appel créé.</div>'}</div>`;
-}
-function addCall(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.calls.push({id:uid(),...f,amount:Number(f.amount),status:'Préparé'});ev.target.reset();save()}
-function postCall(id){let c=S.calls.find(x=>x.id===id);S.owners.forEach(o=>S.entries.push({id:uid(),date:today(),type:'recette',cat:'Appel de fonds',label:`Appel dû ${c.period} - ${o.name}`,amount:share(o.id,c.amount),ownerId:o.id,status:'À relancer'}));c.status='Envoyé';save();toast('Appel comptabilisé')}
-function docCall(id){let c=S.calls.find(x=>x.id===id);addDoc('Appel de fonds '+c.period,`APPEL DE FONDS - ${c.period}\n\nCopropriété : ${S.settings.name}\nÉchéance : ${c.due}\nMontant total : ${EUR.format(c.amount)}\n\nRépartition :\n${S.owners.map(o=>`${o.name} : ${EUR.format(share(o.id,c.amount))}`).join('\n')}`,'Appels de fonds')}
-
-function ag(){
-$('ag').innerHTML=`<div class="card"><h2>Assemblées générales</h2><form class="form" onsubmit="addMeeting(event)">
-<input class="s4" name="title" placeholder="Titre" required>
-<input class="s3" type="date" name="date" required>
-<textarea class="s5" name="agenda" placeholder="Ordre du jour, une ligne par point"></textarea>
-<button class="s12">Ajouter l'AG</button>
-</form></div><div class="list" style="margin-top:12px">${S.meetings.map(m=>`<div class="card"><div class="row"><h2>${esc(m.title)}</h2>${pill(m.status)}</div><div class="tiny muted">${m.date}</div><div class="notice">${m.agenda.map(esc).join('<br>')}</div><div class="actions" style="margin-top:8px"><button class="secondary" onclick="addResolution('${m.id}')">Résolution</button><button class="secondary" onclick="docPV('${m.id}')">PV</button><button class="danger" onclick="remove('meetings','${m.id}')">Suppr.</button></div><div class="list" style="margin-top:8px">${(m.resolutions||[]).map(r=>`<div class="item"><b>${esc(r.title)}</b></div>`).join('')}</div></div>`).join('')}</div>`;
-}
-function addMeeting(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.meetings.push({id:uid(),title:f.title,date:f.date,status:'À préparer',agenda:String(f.agenda||'').split('\n').filter(Boolean),resolutions:[]});ev.target.reset();save()}
-function addResolution(id){let t=prompt('Titre de la résolution');if(!t)return;let m=S.meetings.find(x=>x.id===id);m.resolutions.push({id:uid(),title:t});save()}
-function docPV(id){let m=S.meetings.find(x=>x.id===id);addDoc('PV '+m.title,`PROCÈS-VERBAL - ${m.title}\n\nDate : ${m.date}\n\nOrdre du jour :\n${m.agenda.join('\n')}\n\nRésolutions :\n${(m.resolutions||[]).map(r=>'- '+r.title).join('\n')}`,'AG')}
-
-function lots(){
-$('lots').innerHTML=`<div class="card"><h2>Lots et tantièmes</h2><div class="notice">Total tantièmes : <b>${totalT()}</b></div><br><div class="list">${S.lots.map(l=>`<div class="item lot-mini"><div><b>Lot ${esc(l.n)} - ${esc(l.type)}</b><div class="tiny muted">${esc(owner(l.owner))}</div></div><b>${l.t}</b></div>`).join('')}</div></div>`;
-}
-
-function works(){
-$('works').innerHTML=`<div class="card"><h2>Travaux</h2><form class="form" onsubmit="addWork(event)">
-<input class="s4" name="title" placeholder="Travaux" required>
-<input class="s3" type="number" step="0.01" name="budget" placeholder="Budget">
-<input class="s3" type="date" name="due">
-<select class="s3" name="status"><option>À cadrer</option><option>Devis</option><option>Voté</option><option>En cours</option><option>Terminé</option></select>
-<button class="s12">Ajouter</button>
-<textarea class="s12" name="desc" placeholder="Description"></textarea>
-</form></div><div class="list" style="margin-top:12px">${S.works.map(w=>`<div class="card"><div class="row"><h2>${esc(w.title)}</h2>${pill(w.status)}</div><p>${esc(w.desc||'')}</p><div class="tiny muted">Échéance : ${esc(w.due||'à préciser')}</div><div>Budget : <b>${EUR.format(w.budget||0)}</b></div><div class="actions" style="margin-top:8px"><button class="danger small" onclick="remove('works','${w.id}')">Supprimer</button></div></div>`).join('')}</div>`;
-}
-function addWork(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.works.push({id:uid(),...f,budget:Number(f.budget||0)});ev.target.reset();save()}
-
-function suppliers(){
-$('suppliers').innerHTML=`<div class="card"><h2>Fournisseurs et mensualités</h2><form class="form" onsubmit="addSupplier(event)">
-<input class="s3" name="name" placeholder="Fournisseur" required>
-<input class="s3" name="type" placeholder="Type">
-<input class="s3" name="contract" placeholder="Contrat">
-<input class="s3" type="number" step="0.01" name="amount" placeholder="Montant">
-<select class="s3" name="frequency"><option>Annuelle</option><option>Semestrielle</option><option>Trimestrielle</option><option>Mensuelle</option></select>
-<input class="s3" type="date" name="nextDue">
-<button class="s6">Ajouter fournisseur</button>
-</form></div>
-<div class="list" style="margin-top:12px">${S.suppliers.map(s=>`<div class="card supplier-card">
-<div class="row"><div><h2>${esc(s.name)}</h2><div class="tiny muted">${esc(s.type||'')} - ${esc(s.contract||'')}</div></div><b>${EUR.format(supplierAmount(s))}</b></div>
-<div class="supplier-meta">
-<div class="balance-mini"><span>Fréquence</span><b>${esc(s.frequency||'Annuelle')}</b></div>
-<div class="balance-mini"><span>Mensualité</span><b>${EUR.format(monthlyAmount(s))}</b></div>
-<div class="balance-mini"><span>Prochaine échéance</span><b>${esc(s.nextDue||s.renewal||'à préciser')}</b></div>
-<div class="balance-mini"><span>Type</span><b>${esc(s.type||'')}</b></div>
-</div>
-<div class="actions"><button class="danger small" onclick="remove('suppliers','${s.id}')">Supprimer</button></div>
-</div>`).join('')}</div>`;
-}
-function addSupplier(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.suppliers.push({id:uid(),...f,amount:Number(f.amount||0),renewal:f.nextDue});ev.target.reset();save()}
-
-function incidents(){
-$('incidents').innerHTML=`<div class="card"><h2>Sinistres</h2><form class="form" onsubmit="addIncident(event)">
-<input class="s3" type="date" name="date" value="${today()}">
-<input class="s5" name="title" placeholder="Sujet" required>
-<select class="s2" name="status"><option>Ouvert</option><option>Déclaré assurance</option><option>Clos</option></select>
-<button class="s2">Ajouter</button>
-<textarea class="s12" name="desc" placeholder="Description"></textarea>
-</form></div><div class="list" style="margin-top:12px">${S.incidents.map(i=>`<div class="card"><div class="row"><h2>${esc(i.title)}</h2>${pill(i.status)}</div><div class="tiny muted">${i.date}</div><p>${esc(i.desc||'')}</p></div>`).join('')||'<div class="notice">Aucun sinistre.</div>'}</div>`;
-}
-function addIncident(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.incidents.push({id:uid(),...f});ev.target.reset();save()}
-
-function addDoc(title,content,cat){S.docs.unshift({id:uid(),date:today(),title,content,cat});save();go('docs')}
-function docs(){
-$('docs').innerHTML=`<div class="card"><h2>Documents</h2><div class="list">${S.docs.map(d=>`<div class="item"><div class="row"><div><b>${esc(d.title)}</b><div class="tiny muted">${d.date} - ${esc(d.cat)}</div></div><span class="chip">Doc</span></div><div class="doc" contenteditable="true" onblur="saveDoc('${d.id}',this.innerText)">${esc(d.content)}</div><div class="actions" style="margin-top:8px"><button class="secondary small" onclick="copyDoc('${d.id}')">Copier</button><button class="danger small" onclick="remove('docs','${d.id}')">Suppr.</button></div></div>`).join('')||'<div class="notice">Aucun document.</div>'}</div></div>`;
-}
-function saveDoc(id,text){let d=S.docs.find(x=>x.id===id);d.content=text;save()}
-function copyDoc(id){navigator.clipboard.writeText(S.docs.find(d=>d.id===id).content);toast('Copié')}
-
-function settings(){
-$('settings').innerHTML=`<div class="card"><h2>Paramètres et sauvegarde</h2>
-<form class="form" onsubmit="saveSettings(event)">
-<input class="s4" name="bank" value="${esc(S.settings.bank)}">
-<input class="s4" type="number" step="0.01" name="bankAmount" value="${S.settings.bankAmount}">
-<input class="s4" type="number" step="0.01" name="savingsAmount" value="${S.settings.savingsAmount}">
-<button class="s12">Enregistrer le solde bancaire</button>
-</form>
-<div class="notice" style="margin-top:10px">Le solde bancaire affiché est piloté dans les paramètres. Les données restent locales sur ton iPhone. Exporte un JSON avant chaque mise à jour GitHub.</div>
-<div class="actions" style="margin-top:10px"><button onclick="exportJSON()">Exporter JSON</button><label class="chip">Importer JSON<input class="hide" type="file" accept="application/json" onchange="importJSON(event)"></label><button class="danger" onclick="resetData()">Réinitialiser</button></div>
-</div>`;
-}
-function saveSettings(ev){ev.preventDefault();let f=Object.fromEntries(new FormData(ev.target));S.settings.bank=f.bank;S.settings.bankAmount=Number(f.bankAmount||0);S.settings.savingsAmount=Number(f.savingsAmount||0);save();toast('Paramètres enregistrés')}
-
-function exportJSON(){
-let data={exportedAt:new Date().toISOString(),app:'9 Passage Bellevue V4.2 Pilotage financier',data:S};
-let a=document.createElement('a');
-a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
-a.download='9-passage-bellevue-sauvegarde-v4-2.json';
-a.click();
-URL.revokeObjectURL(a.href);
-toast('Sauvegarde JSON générée');
-}
-function importJSON(ev){
-let f=ev.target.files[0];if(!f)return;
-let r=new FileReader();
-r.onload=()=>{S=migrate(JSON.parse(r.result).data||JSON.parse(r.result));save();toast('Sauvegarde restaurée')};
-r.readAsText(f);
-}
-function resetData(){if(confirm('Réinitialiser les données ?')){S=structuredClone(seed);save()}}
-
-buildNav();
-render();
+function render(){home();finance();owners();calls();closing();works();invoices();meetings();docs();settings()}
+function home(){const done=S.checklist.filter(x=>x.status==='Terminé').length,pct=Math.round(done/S.checklist.length*100);$('home').innerHTML=`<div class="grid g4"><div class="card kpi"><div class="ico">🏦</div><div><div class="metric">${EUR.format(S.settings.bankAtDate)}</div><div class="muted tiny">Compte courant au ${S.settings.bankDate.split('-').reverse().join('/')}</div></div></div><div class="card kpi"><div class="ico">💰</div><div><div class="metric">${EUR.format(S.settings.savingsAtDate)}</div><div class="muted tiny">Livret A connu</div></div></div><div class="card kpi"><div class="ico">🧱</div><div><div class="metric">${EUR.format(worksFund())}</div><div class="muted tiny">Fonds travaux comptable</div></div></div><div class="card kpi"><div class="ico">⚠️</div><div><div class="metric">${EUR.format(outstanding())}</div><div class="muted tiny">Créances identifiées</div></div></div></div><div class="grid g2" style="margin-top:12px"><div class="card"><h2>Progression de la clôture 2026</h2><div class="progress-row"><span>${done} actions terminées sur ${S.checklist.length}</span><b>${pct} %</b></div><div class="bar" style="margin:10px 0"><i style="width:${pct}%"></i></div><div class="stack">${S.checklist.filter(x=>x.status!=='Terminé').slice(0,5).map(x=>`<div class="item row"><div><b>${esc(x.title)}</b><div class="tiny muted">${esc(x.area)}</div></div>${statusPill(x.status)}</div>`).join('')}</div></div><div class="card"><h2>Situation financière connue</h2><div class="mini-grid"><div class="mini"><span>Banque totale connue</span><b>${EUR.format(totalBank())}</b></div><div class="mini"><span>Charges courantes documentées</span><b>${EUR.format(currentSpent())}</b></div><div class="mini"><span>Dépenses exceptionnelles</span><b>${EUR.format(exceptionalSpent())}</b></div><div class="mini"><span>Budget 2027</span><b>${EUR.format(S.settings.budget2027)}</b></div></div><div class="alert" style="margin-top:10px">L’appel exceptionnel GALLOIS / GUIFFIER de 1 514,42 € n’est pas encore encaissé. Le règlement PAREL de 1 334,47 € est affecté à un appel courant antérieur.</div></div></div><div class="grid g2" style="margin-top:12px"><div class="card"><h2>Budget courant 2026</h2><div class="row"><span>Budget initial</span><b>${EUR.format(S.settings.budget2026)}</b></div><div class="row"><span>Provisions T1 à T3</span><b>${EUR.format(S.settings.currentCalls2026)}</b></div><div class="row"><span>Charges documentées</span><b>${EUR.format(currentSpent())}</b></div><div class="bar" style="margin-top:10px"><i style="width:${Math.min(100,currentSpent()/S.settings.currentCalls2026*100)}%"></i></div></div><div class="card"><h2>Fonds travaux</h2><div class="row"><span>Solde comptable 2025</span><b>${EUR.format(S.settings.worksFundOpening)}</b></div><div class="row"><span>Appelé en 2026</span><b>${EUR.format(S.settings.worksFundCalls)}</b></div><div class="row"><span>Solde comptable théorique</span><b>${EUR.format(worksFund())}</b></div><div class="row"><span>Livret A connu</span><b>${EUR.format(S.settings.savingsAtDate)}</b></div><div class="notice" style="margin-top:9px">Écart provisoire Livret A / fonds travaux : ${EUR.format(S.settings.savingsAtDate-worksFund())}, à expliquer à la clôture.</div></div></div>`}
+function finance(){const rows=S.budget2026.map(b=>{const actual=sum(S.expenses,e=>e.cat===b.label?e.amount:0);return {...b,actual}});$('finance').innerHTML=`<div class="tabs"><button class="tab active">Budget / réel</button><button class="tab" onclick="go('invoices')">Factures</button><button class="tab" onclick="go('works')">Exceptionnel</button></div><div class="grid g3"><div class="card"><div class="muted tiny">Budget 2026</div><div class="metric">${EUR.format(S.settings.budget2026)}</div></div><div class="card"><div class="muted tiny">Charges documentées</div><div class="metric">${EUR.format(currentSpent())}</div></div><div class="card"><div class="muted tiny">Reste sur provisions appelées</div><div class="metric">${EUR.format(S.settings.currentCalls2026-currentSpent())}</div></div></div><div class="card" style="margin-top:12px"><h2>Budget 2026 et réalisé à date</h2><div class="table-wrap"><table><thead><tr><th>Poste</th><th>Clé</th><th class="num">Budget</th><th class="num">Réalisé</th><th class="num">Écart</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.label)}</td><td>${r.key==='CG'?'Générale 1 000':'BAT A 954'}</td><td class="num">${EUR.format(r.planned)}</td><td class="num">${EUR.format(r.actual)}</td><td class="num">${EUR.format(r.actual-r.planned)}</td></tr>`).join('')}</tbody></table></div></div><div class="card" style="margin-top:12px"><h2>Ajouter une dépense</h2><form class="form" onsubmit="addExpense(event)"><input class="s2" type="date" name="date" value="${today()}" required><input class="s3" name="supplier" placeholder="Fournisseur" required><input class="s4" name="label" placeholder="Libellé" required><input class="s3" name="invoice" placeholder="N° facture"><select class="s3" name="cat">${S.budget2026.map(x=>`<option>${esc(x.label)}</option>`).join('')}</select><select class="s3" name="key"><option value="CG">Générale 1 000</option><option value="BATA">BAT A 954</option></select><input class="s3" type="number" step="0.01" min="0" name="amount" placeholder="Montant" required><select class="s3" name="status"><option>Justifié</option><option>Partiel</option><option>Factures manquantes</option></select><button class="s12">Ajouter</button></form></div>`}
+function addExpense(e){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));S.expenses.push({id:uid(),...f,amount:Number(f.amount),scope:'current'});save('Dépense ajoutée')}
+function owners(){ $('owners').innerHTML=`<div class="grid g3">${S.owners.map(o=>{const ms=S.ownerMovements.filter(m=>m.ownerId===o.id),due=sum(ms,m=>m.kind.includes('call')&&m.status!=='Réglé'?m.amount:0);return `<div class="card"><div class="owner-head"><div><h2>${esc(o.name)}</h2><div class="tiny muted">Compte ${o.account} · Lots ${o.lots}</div></div>${statusPill(due?'Non réglé':'À jour')}</div><div class="mini-grid"><div class="mini"><span>Clé générale</span><b>${o.cg}/1 000</b></div><div class="mini"><span>BAT A</span><b>${o.bata}/954</b></div></div><div class="metric" style="margin-top:10px">${EUR.format(due)}</div><div class="tiny muted">Solde identifié restant dû</div><div class="stack" style="margin-top:10px">${ms.map(m=>`<div class="item"><div class="row"><div><b>${esc(m.label)}</b><div class="tiny muted">${m.date} · ${esc(m.kind)}</div></div><b>${EUR.format(m.amount)}</b></div><div style="margin-top:6px">${statusPill(m.status)}</div></div>`).join('')}</div></div>`}).join('')}</div><div class="card" style="margin-top:12px"><h2>Ajouter un mouvement copropriétaire</h2><form class="form" onsubmit="addOwnerMovement(event)"><select class="s3" name="ownerId">${S.owners.map(o=>`<option value="${o.id}">${esc(o.name)}</option>`).join('')}</select><input class="s2" type="date" name="date" value="${today()}"><select class="s3" name="kind"><option value="call-current">Appel courant</option><option value="call-exceptional">Appel exceptionnel</option><option value="payment-current">Règlement courant</option><option value="payment-exceptional">Règlement exceptionnel</option></select><input class="s3" name="label" placeholder="Libellé" required><input class="s2" type="number" step="0.01" name="amount" placeholder="Montant" required><select class="s2" name="status"><option>Non réglé</option><option>Réglé</option><option>Affecté</option></select><button class="s12">Ajouter</button></form></div>`}
+function addOwnerMovement(e){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));S.ownerMovements.push({id:uid(),...f,amount:Number(f.amount)});save('Mouvement ajouté')}
+function calls(){const ownerAmount=(o,c)=>Math.round((c.cg*o.cg/1000+c.bata*o.bata/954)*100)/100;$('calls').innerHTML=`<div class="card"><h2>Échéancier 2027 · budget 9 500 €</h2><div class="notice">Charges générales : 3 120 € par an sur 1 000 tantièmes. Chauffage : 6 380 € par an sur la clé BAT A de 954 tantièmes.</div></div><div class="stack" style="margin-top:12px">${S.calls2027.map(c=>`<div class="card"><div class="row"><div><h2>${c.label}</h2><div class="tiny muted">Exigible le ${c.due.split('-').reverse().join('/')}</div></div><div class="metric">${EUR.format(c.cg+c.bata)}</div></div><div class="table-wrap"><table><thead><tr><th>Copropriétaire</th><th class="num">Charges générales</th><th class="num">BAT A</th><th class="num">Total</th></tr></thead><tbody>${S.owners.map(o=>{const cg=Math.round(c.cg*o.cg/10)/100,ba=Math.round(c.bata*o.bata/9.54)/100;return `<tr><td>${esc(o.name)}</td><td class="num">${EUR.format(cg)}</td><td class="num">${EUR.format(ba)}</td><td class="num"><b>${EUR.format(cg+ba)}</b></td></tr>`}).join('')}</tbody></table></div></div>`).join('')}</div>`}
+function closing(){const done=S.checklist.filter(x=>x.status==='Terminé').length;$('closing').innerHTML=`<div class="grid g3"><div class="card"><div class="muted tiny">Progression</div><div class="metric">${Math.round(done/S.checklist.length*100)} %</div></div><div class="card"><div class="muted tiny">Actions terminées</div><div class="metric">${done}/${S.checklist.length}</div></div><div class="card"><div class="muted tiny">Charges à date</div><div class="metric">${EUR.format(currentSpent())}</div></div></div><div class="card" style="margin-top:12px"><h2>Checklist de clôture</h2><div class="stack">${S.checklist.map(c=>`<div class="item check"><input type="checkbox" ${c.status==='Terminé'?'checked':''} onchange="toggleCheck('${c.id}',this.checked)"><div><b>${esc(c.title)}</b><div class="tiny muted">${esc(c.area)}</div></div>${statusPill(c.status)}</div>`).join('')}</div></div><div class="card" style="margin-top:12px"><h2>Contrôles de clôture</h2><div class="stack"><div class="notice">Compte courant : relevés disponibles jusqu’au 30/09/2026. Solde connu : ${EUR.format(S.settings.bankAtDate)}.</div><div class="notice">Livret A : solde connu au 30/01/2026 de ${EUR.format(S.settings.savingsAtDate)}. Relevé annuel et intérêts à récupérer.</div><div class="notice">Fonds travaux comptable : ${EUR.format(worksFund())}. Aucune dépense affectée identifiée.</div><div class="alert">La régularisation individuelle ne doit être calculée qu’après intégration des charges d’octobre à décembre et des factures 2026 reçues début 2027.</div></div></div>`}
+function toggleCheck(id,v){const c=S.checklist.find(x=>x.id===id);c.status=v?'Terminé':'À faire';save('Checklist mise à jour')}
+function works(){const called=sum(S.exceptional,x=>x.called),received=sum(S.exceptional,x=>x.received),spent=sum(S.exceptional,x=>x.spent);$('works').innerHTML=`<div class="grid g3"><div class="card"><div class="muted tiny">Appelé</div><div class="metric">${EUR.format(called)}</div></div><div class="card"><div class="muted tiny">Encaissé identifié</div><div class="metric">${EUR.format(received)}</div></div><div class="card"><div class="muted tiny">Dépensé justifié</div><div class="metric">${EUR.format(spent)}</div></div></div><div class="card" style="margin-top:12px"><h2>Rénovation énergétique</h2><div class="table-wrap"><table><thead><tr><th>Opération</th><th class="num">Appelé</th><th class="num">Encaissé</th><th class="num">Dépensé</th><th class="num">Solde</th><th>Statut</th></tr></thead><tbody>${S.exceptional.map(x=>`<tr><td><b>${esc(x.title)}</b><div class="tiny muted">${esc(x.supplier)} · ${esc(x.docs)}</div></td><td class="num">${EUR.format(x.called)}</td><td class="num">${EUR.format(x.received)}</td><td class="num">${EUR.format(x.spent)}</td><td class="num">${EUR.format(x.received-x.spent)}</td><td>${statusPill(x.status)}</td></tr>`).join('')}</tbody></table></div></div>`}
+function invoices(){ $('invoices').innerHTML=`<div class="card"><h2>Registre des charges et factures</h2><div class="table-wrap"><table><thead><tr><th>Date</th><th>Fournisseur / pièce</th><th>Catégorie</th><th>Clé</th><th class="num">Montant</th><th>Statut</th></tr></thead><tbody>${S.expenses.map(e=>`<tr><td>${e.date}</td><td><b>${esc(e.supplier)}</b><div class="tiny muted">${esc(e.invoice)} · ${esc(e.label)}</div></td><td>${esc(e.cat)}</td><td>${e.key==='CG'?'1 000':'954'}</td><td class="num">${EUR.format(e.amount)}</td><td>${statusPill(e.status)}</td></tr>`).join('')}</tbody></table></div></div>`}
+function meetings(){ $('meetings').innerHTML=`<div class="card"><h2>Assemblées générales</h2><div class="stack">${S.meetings.map(m=>`<div class="item"><div class="row"><div><b>${esc(m.title)}</b><div class="tiny muted">${m.date}</div></div>${statusPill(m.status)}</div><div class="notice" style="margin-top:8px">${m.agenda.map(esc).join('<br>')}</div></div>`).join('')}</div></div>`}
+function docs(){ $('docs').innerHTML=`<div class="card"><h2>Documents et notes</h2><form class="form" onsubmit="addDoc(event)"><input class="s4" name="title" placeholder="Titre" required><select class="s3" name="cat"><option>Comptabilité</option><option>AG</option><option>Travaux</option><option>Banque</option></select><textarea class="s5" name="content" placeholder="Contenu"></textarea><button class="s12">Ajouter</button></form></div><div class="stack" style="margin-top:12px">${S.docs.map(d=>`<div class="card"><div class="row"><div><b>${esc(d.title)}</b><div class="tiny muted">${esc(d.cat)} · ${d.date}</div></div><button class="danger small" onclick="removeDoc('${d.id}')">Supprimer</button></div><div class="doc" style="margin-top:8px">${esc(d.content)}</div></div>`).join('')||'<div class="notice">Aucun document local ajouté.</div>'}</div>`}
+function addDoc(e){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));S.docs.unshift({id:uid(),date:today(),...f});save('Document ajouté')}
+function removeDoc(id){S.docs=S.docs.filter(x=>x.id!==id);save('Document supprimé')}
+function settings(){const legacy=!!localStorage.getItem(V42);$('settings').innerHTML=`<div class="card"><h2>Paramètres financiers</h2><form class="form" onsubmit="saveSettings(event)"><input class="s3" type="number" step="0.01" name="bankAtDate" value="${S.settings.bankAtDate}" placeholder="Compte courant"><input class="s3" type="date" name="bankDate" value="${S.settings.bankDate}"><input class="s3" type="number" step="0.01" name="savingsAtDate" value="${S.settings.savingsAtDate}" placeholder="Livret A"><input class="s3" type="date" name="savingsDate" value="${S.settings.savingsDate}"><input class="s3" type="number" step="0.01" name="worksFundOpening" value="${S.settings.worksFundOpening}" placeholder="Fonds travaux ouverture"><input class="s3" type="number" step="0.01" name="worksFundCalls" value="${S.settings.worksFundCalls}" placeholder="Fonds travaux appelé"><button class="s12">Enregistrer</button></form></div><div class="card" style="margin-top:12px"><h2>Sauvegarde et migration</h2><div class="notice">Les données restent dans le navigateur. Exporte un fichier JSON avant toute mise à jour du fichier index.html ou du site GitHub.</div><div class="actions" style="margin-top:10px"><button onclick="exportJSON()">Exporter JSON V6</button><label class="chip">Importer JSON<input class="hide" type="file" accept="application/json" onchange="importJSON(event)"></label>${legacy?'<button class="secondary" onclick="importLegacy()">Importer la V4.2</button>':''}<button class="danger" onclick="resetData()">Réinitialiser</button></div></div>`}
+function saveSettings(e){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));['bankAtDate','savingsAtDate','worksFundOpening','worksFundCalls'].forEach(k=>f[k]=Number(f[k]||0));S.settings={...S.settings,...f};save('Paramètres enregistrés')}
+function importLegacy(){try{const old=JSON.parse(localStorage.getItem(V42));if(!old)return toast('Aucune V4.2 détectée');S.meta.legacyImported=today();S.docs.unshift({id:uid(),date:today(),title:'Archive import V4.2',cat:'Migration',content:`Import détecté : ${old.owners?.length||0} copropriétaires, ${old.entries?.length||0} écritures, ${old.docs?.length||0} documents. Les données financières V6 de référence ont été conservées.`});(old.docs||[]).forEach(d=>S.docs.push({...d,id:uid(),cat:'Archive V4.2'}));save('Archives V4.2 importées')}catch(e){toast('Import V4.2 impossible')}}
+function exportJSON(){const blob=new Blob([JSON.stringify({app:'9 Passage Bellevue V6',exportedAt:new Date().toISOString(),data:S},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`9-passage-bellevue-v6-${today()}.json`;a.click();URL.revokeObjectURL(a.href);toast('Sauvegarde JSON créée')}
+function importJSON(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const raw=JSON.parse(r.result);S=migrate(raw.data||raw);save('Sauvegarde restaurée')}catch(e){toast('Fichier JSON invalide')}};r.readAsText(f)}
+function resetData(){if(confirm('Réinitialiser la V6 avec les données de référence du 14/10/2026 ?')){S=structuredClone(seed);save('Application réinitialisée')}}
+buildNav();render();
 </script>
-</body>
-</html>
+</body></html>
